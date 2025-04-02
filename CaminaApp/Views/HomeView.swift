@@ -1,30 +1,88 @@
 import SwiftUI
 import MapKit
+import CoreLocation
 
-struct HomeView: View {
-    @State private var isShowingNotification = false
-    @State private var searchText = ""
-    @State private var selectedCategory = "Todas"
-    @State private var region = MKCoordinateRegion(
+// MARK: - Modelo para los restaurantes con coordenadas
+struct RestaurantLocation: Identifiable {
+    let id = UUID()
+    let name: String
+    let coordinate: CLLocationCoordinate2D
+    let description: String
+}
+
+// MARK: - Location Manager
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    private let locationManager = CLLocationManager()
+
+    @Published var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 19.0413, longitude: -98.2062),
         span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     )
-    @State private var isShowingSearchResults = false
+
+    private var hasSetInitialRegion = false
+
+    override init() {
+        super.init()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+
+        if !hasSetInitialRegion {
+            DispatchQueue.main.async {
+                self.region = MKCoordinateRegion(
+                    center: location.coordinate,
+                    span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                )
+                self.hasSetInitialRegion = true
+            }
+        }
+    }
+}
+
+// MARK: - Restaurant Detail Sheet
+struct RestaurantDetailSheet: View {
+    let restaurant: RestaurantLocation
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text(restaurant.name)
+                .font(.title2)
+                .bold()
+
+            Text(restaurant.description)
+                .font(.body)
+
+            Spacer()
+        }
+        .padding()
+        .presentationDetents([.fraction(0.3), .medium])
+    }
+}
+
+// MARK: - HomeView
+struct HomeView: View {
+    @StateObject private var locationManager = LocationManager()
+    @State private var isShowingNotification = false
+    @State private var searchText = ""
+    @State private var selectedCategory = "Todas"
+    @State private var selectedRestaurant: RestaurantLocation? = nil
     var name: String = "Megan"
+
+    let nearbyRestaurants = [
+        RestaurantLocation(name: "Santoua", coordinate: CLLocationCoordinate2D(latitude: 19.0418, longitude: -98.2055), description: "Restaurante japonés contemporáneo con sushi y ramen."),
+        RestaurantLocation(name: "Cus Cus Cus", coordinate: CLLocationCoordinate2D(latitude: 19.0420, longitude: -98.2070), description: "Comida árabe y mediterránea en un ambiente acogedor.")
+    ]
 
     var body: some View {
         NavigationView {
             ScrollView {
-                // Notification Navigation
                 NavigationLink(destination: NotificationView(), isActive: $isShowingNotification) { EmptyView() }
-                
-                // Hidden navigation link for search results
-                NavigationLink(
-                    destination: HealthyCravingSearchView(initialSearchText: searchText),
-                    isActive: $isShowingSearchResults
-                ) { EmptyView() }
-                
-                // Header
+
                 HStack {
                     VStack(alignment: .leading) {
                         Text("  Hi \(name),")
@@ -35,27 +93,20 @@ struct HomeView: View {
                     Spacer()
                 }
 
-                // Search Section
                 VStack(alignment: .leading, spacing: 10) {
-                    // Search field with return key handler
-                    TextField("Vamos a comer...", text: $searchText, onCommit: {
-                        if !searchText.isEmpty {
-                            isShowingSearchResults = true
-                        }
-                    })
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(12)
-                    .overlay(
-                        HStack {
-                            Spacer()
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(.gray)
-                                .padding(.trailing, 10)
-                        }
-                    )
+                    TextField("Vamos a comer...", text: $searchText)
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(12)
+                        .overlay(
+                            HStack {
+                                Spacer()
+                                Image(systemName: "magnifyingglass")
+                                    .foregroundColor(.gray)
+                                    .padding(.trailing, 10)
+                            }
+                        )
 
-                    // Categories
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(["Todas", "Hamburguesas", "Tacos", "Sushi", "Cafés"], id: \.self) { category in
@@ -77,7 +128,6 @@ struct HomeView: View {
                 .padding(.horizontal)
                 .padding()
 
-                // Resto de tu contenido permanece igual...
                 WeeklyActivitySummaryView()
                 PopularNearbyView()
 
@@ -88,12 +138,68 @@ struct HomeView: View {
                         .padding(.top, 16)
                         .padding(.horizontal)
 
-                    Map(coordinateRegion: $region)
+                    ZStack(alignment: .bottomTrailing) {
+                        // Map with annotations
+                        Map(coordinateRegion: $locationManager.region, annotationItems: nearbyRestaurants) { restaurant in
+                            MapAnnotation(coordinate: restaurant.coordinate) {
+                                Button(action: {
+                                    selectedRestaurant = restaurant
+                                }) {
+                                    VStack {
+                                        Image(systemName: "mappin.circle.fill")
+                                            .foregroundColor(.red)
+                                            .font(.title)
+                                        Text(restaurant.name)
+                                            .font(.caption)
+                                            .foregroundColor(.black)
+                                    }
+                                }
+                            }
+                        }
                         .frame(height: 200)
                         .cornerRadius(12)
-                        .padding(.horizontal)
+
+                        // Zoom buttons
+                        VStack {
+                            HStack {
+                                // Button to zoom out
+                                Button(action: {
+                                    let newSpan = MKCoordinateSpan(latitudeDelta: locationManager.region.span.latitudeDelta * 1.5, longitudeDelta: locationManager.region.span.longitudeDelta * 1.5)
+                                    locationManager.region.span = newSpan
+                                }) {
+                                    Image(systemName: "minus.circle.fill")
+                                        .font(.title)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Circle().foregroundColor(.black).opacity(0.5))
+                                }
+
+                                Spacer()
+
+                                // Button to zoom in
+                                Button(action: {
+                                    let newSpan = MKCoordinateSpan(latitudeDelta: locationManager.region.span.latitudeDelta / 1.5, longitudeDelta: locationManager.region.span.longitudeDelta / 1.5)
+                                    locationManager.region.span = newSpan
+                                }) {
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.title)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Circle().foregroundColor(.black).opacity(0.5))
+                                }
+                            }
+                            .padding()
+                            Spacer()
+                        }
+                    }
+                    .padding(.horizontal)
                 }
                 .padding(.bottom)
+
+                // Restaurant detail sheet
+                .sheet(item: $selectedRestaurant) { restaurant in
+                    RestaurantDetailSheet(restaurant: restaurant)
+                }
 
                 .navigationTitle("Home")
                 .navigationBarItems(trailing: Button(action: {
@@ -107,7 +213,7 @@ struct HomeView: View {
     }
 }
 
-// Resto de tus estructuras (PopularNearbyView, WeeklyActivitySummaryView, etc.) permanecen igual
+// MARK: - PopularNearbyView
 struct PopularNearbyView: View {
     struct Restaurant: Identifiable {
         let id = UUID()
@@ -116,19 +222,19 @@ struct PopularNearbyView: View {
         let distance: String
         let calories: String
     }
-    
+
     let restaurants: [Restaurant] = [
         Restaurant(image: Image("restaurant1"), name: "Santoua", distance: "1.2 km", calories: "450 kcal"),
         Restaurant(image: Image("restaurant2"), name: "Cus Cus Cus", distance: "850 m", calories: "520 kcal")
     ]
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("Populares cerca de ti")
                 .font(.title3)
                 .fontWeight(.semibold)
                 .padding(.horizontal)
-            
+
             HStack(spacing: 16) {
                 ForEach(restaurants) { restaurant in
                     VStack(alignment: .leading) {
@@ -138,7 +244,7 @@ struct PopularNearbyView: View {
                             .frame(width: 160, height: 160)
                             .cornerRadius(12)
                             .clipped()
-                        
+
                         VStack(alignment: .leading) {
                             Text(restaurant.name)
                                 .fontWeight(.bold)
@@ -162,6 +268,7 @@ struct PopularNearbyView: View {
     }
 }
 
+// MARK: - WeeklyActivitySummaryView
 struct WeeklyActivitySummaryView: View {
     @State private var navigateToDetail = false
 
@@ -170,7 +277,6 @@ struct WeeklyActivitySummaryView: View {
             navigateToDetail = true
         }) {
             ZStack {
-                // Fondo difuminado bonito usando colores definidos
                 LinearGradient(
                     gradient: Gradient(colors: [Color.primaryGreen.opacity(0.8), Color.navyBlue.opacity(0.8)]),
                     startPoint: .topLeading,
@@ -207,7 +313,6 @@ struct WeeklyActivitySummaryView: View {
 
                     Spacer()
 
-                    // Mini círculo de progreso
                     ZStack {
                         Circle()
                             .stroke(lineWidth: 8)
@@ -229,20 +334,20 @@ struct WeeklyActivitySummaryView: View {
                     .padding(.trailing)
                 }
                 .padding()
-                .frame(width: 351, height: 165)
             }
         }
         .background(
-            NavigationLink(destination: GeneralPlantView(plant: myTomato), isActive: $navigateToDetail) {
+            NavigationLink(destination: WeeklyActivityDetailView(), isActive: $navigateToDetail) {
                 EmptyView()
             }
         )
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.1), radius: 16, x: 0, y: 0)
-        .frame(width: 351, height: 165, alignment: .leading)
+        .frame(width: 351, height: 165)
     }
 }
 
+// MARK: - WeeklyActivityDetailView
 struct WeeklyActivityDetailView: View {
     var body: some View {
         Text("Detalle de la actividad semanal")
@@ -251,6 +356,7 @@ struct WeeklyActivityDetailView: View {
     }
 }
 
+// MARK: - Preview
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
