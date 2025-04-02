@@ -40,6 +40,7 @@
 		AB200DD72B98EC7D002DE93A /* GeneralGardenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB200DD62B98EC7D002DE93A /* GeneralGardenView.swift */; };
 		AB200DD92B992873002DE93A /* PlantCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB200DD82B992873002DE93A /* PlantCardView.swift */; };
 		AB200DDB2B9B731B002DE93A /* PlantStagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB200DDA2B9B731B002DE93A /* PlantStagesView.swift */; };
+		ABEC82B32D9D331B0051495B /* SocialGeneralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEC82B12D9D331B0051495B /* SocialGeneralView.swift */; };
 		E4189C8A2D9D134E005FA7C0 /* CaminaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189C892D9D134E005FA7C0 /* CaminaApp.swift */; };
 		E4189C8C2D9D1360005FA7C0 /* CaminaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189C8B2D9D1360005FA7C0 /* CaminaTests.swift */; };
 		E4189C8F2D9D136E005FA7C0 /* CaminaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189C8E2D9D136E005FA7C0 /* CaminaUITestsLaunchTests.swift */; };
@@ -132,6 +133,8 @@
 		AB200DD62B98EC7D002DE93A /* GeneralGardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralGardenView.swift; sourceTree = "<group>"; };
 		AB200DD82B992873002DE93A /* PlantCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCardView.swift; sourceTree = "<group>"; };
 		AB200DDA2B9B731B002DE93A /* PlantStagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantStagesView.swift; sourceTree = "<group>"; };
+		ABEC82B02D9D30F70051495B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		ABEC82B12D9D331B0051495B /* SocialGeneralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialGeneralView.swift; sourceTree = "<group>"; };
 		E4189C892D9D134E005FA7C0 /* CaminaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminaApp.swift; sourceTree = "<group>"; };
 		E4189C8B2D9D1360005FA7C0 /* CaminaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminaTests.swift; sourceTree = "<group>"; };
 		E4189C8D2D9D136E005FA7C0 /* CaminaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminaUITests.swift; sourceTree = "<group>"; };
@@ -143,6 +146,8 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A5C90ED02D9D27F000E322EE /* Images */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Images; sourceTree = "<group>"; };
+		A5C90ED12D9D581F00E322EE /* Search */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Search; sourceTree = "<group>"; };
+		A5C90ED42D9D869F00E322EE /* Restaurant */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Restaurant; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +229,9 @@
 		061572B52B9246C8002F6ADD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A5C90ED42D9D869F00E322EE /* Restaurant */,
+				A5C90ED12D9D581F00E322EE /* Search */,
+				ABEC82B22D9D331B0051495B /* Social */,
 				AB1D139B2B9582570025EFFA /* Profile */,
 				06D181A22B92378A00352475 /* HomeView.swift */,
 				061572BB2B924CC8002F6ADD /* Plant */,
@@ -285,6 +293,7 @@
 		06D181942B92378A00352475 = {
 			isa = PBXGroup;
 			children = (
+				ABEC82B02D9D30F70051495B /* .gitignore */,
 				06D1819F2B92378A00352475 /* CaminaApp */,
 				06D181B02B92378B00352475 /* CaminaTests */,
 				06D181BA2B92378B00352475 /* CaminaUITests */,
@@ -351,6 +360,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		ABEC82B22D9D331B0051495B /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				ABEC82B12D9D331B0051495B /* SocialGeneralView.swift */,
+			);
+			path = Social;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -368,6 +385,8 @@
 			);
 			fileSystemSynchronizedGroups = (
 				A5C90ED02D9D27F000E322EE /* Images */,
+				A5C90ED12D9D581F00E322EE /* Search */,
+				A5C90ED42D9D869F00E322EE /* Restaurant */,
 			);
 			name = CaminaApp;
 			productName = Huertos;
@@ -519,6 +538,7 @@
 				E4189C922D9D1415005FA7C0 /* ProfileView.swift in Sources */,
 				061572C92B924E75002F6ADD /* PlantView.swift in Sources */,
 				AB200DD72B98EC7D002DE93A /* GeneralGardenView.swift in Sources */,
+				ABEC82B32D9D331B0051495B /* SocialGeneralView.swift in Sources */,
 				061572C72B924E50002F6ADD /* CollectionGardenView.swift in Sources */,
 				AB1D138E2B93998A0025EFFA /* NewPlantView.swift in Sources */,
 				AB1D13942B9560130025EFFA /* TreeView.swift in Sources */,

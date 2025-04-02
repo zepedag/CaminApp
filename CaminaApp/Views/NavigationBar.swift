@@ -7,10 +7,10 @@ struct NavigationBar: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            CollectionGardenView(gardens: users.first?.gardens ?? [])
+            SocialGeneralView()
                 .tabItem {
-                    Image(systemName: "leaf.fill")
-                    Text("Gardens")
+                    Image(systemName: "person.fill")
+                    Text("Social")
                 }
                 .tag(0)
             
