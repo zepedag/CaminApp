@@ -111,6 +111,8 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A5C90ED02D9D27F000E322EE /* Images */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Images; sourceTree = "<group>"; };
+		A5C90ED12D9D581F00E322EE /* Search */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Search; sourceTree = "<group>"; };
+		A5C90ED42D9D869F00E322EE /* Restaurant */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Restaurant; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,8 @@
 		061572B52B9246C8002F6ADD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A5C90ED42D9D869F00E322EE /* Restaurant */,
+				A5C90ED12D9D581F00E322EE /* Search */,
 				ABEC82B22D9D331B0051495B /* Social */,
 				AB1D139B2B9582570025EFFA /* Profile */,
 				06D181A22B92378A00352475 /* HomeView.swift */,
@@ -315,6 +319,8 @@
 			);
 			fileSystemSynchronizedGroups = (
 				A5C90ED02D9D27F000E322EE /* Images */,
+				A5C90ED12D9D581F00E322EE /* Search */,
+				A5C90ED42D9D869F00E322EE /* Restaurant */,
 			);
 			name = CaminaApp;
 			productName = Huertos;
