@@ -74,6 +74,7 @@ struct HomeView: View {
     @State private var selectedCategory = "All"
     @State private var selectedRestaurant: RestaurantLocation? = nil
     @State private var showingDetailSheet = false
+    @State private var isShowingSearchResults = false
     @State private var selectedRestaurantDetail: Restaurants? = nil
     
     @State private var userName: String = "Hi"
@@ -87,6 +88,8 @@ struct HomeView: View {
         NavigationView {
             ScrollView {
                 NavigationLink(destination: NotificationView(), isActive: $isShowingNotification) { EmptyView() }
+                NavigationLink(destination: HealthyCravingSearchView(initialSearchText: searchText),isActive: $isShowingSearchResults
+                ){ EmptyView() }
                 
                 HStack {
                     VStack(alignment: .leading) {
@@ -135,6 +138,7 @@ struct HomeView: View {
                     .padding(.vertical, 10)
                 }
                 .padding(.horizontal)
+                .padding()
                 
                 WeeklyActivitySummaryView()
                 PopularNearbyView()

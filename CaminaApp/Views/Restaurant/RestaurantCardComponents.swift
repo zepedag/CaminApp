@@ -7,8 +7,8 @@ struct CalorieComparisonView: View {
         ZStack {
             Circle()
                 .stroke(lineWidth: 8)
-                .opacity(0.2)
-                .foregroundColor(.gray)
+                .opacity(0.3)
+                .foregroundColor(.white)
             
             Circle()
                 .trim(from: 0.0, to: CGFloat(min(percentage, 1.0)))
@@ -20,8 +20,10 @@ struct CalorieComparisonView: View {
             VStack {
                 Text("\(Int(percentage * 100))%")
                     .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(.white)
                 Text("quemado")
                     .font(.system(size: 8))
+                    .foregroundColor(.white)
             }
         }
     }
@@ -38,8 +40,8 @@ struct NutritionBadge: View {
                 .font(.system(size: 12, weight: .bold))
                 .foregroundColor(color)
             Text(label)
-                .font(.system(size: 10))
-                .foregroundColor(.gray)
+                .font(.system(size: 10, weight: .bold))
+                .foregroundColor(.white)
         }
         .padding(6)
         .background(color.opacity(0.1))

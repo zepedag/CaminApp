@@ -28,8 +28,13 @@ struct SignUpView: View {
 
                 VStack(spacing: 16) {
                     FormTextField(label: "First Name", text: $user.firstName)
-                    FormTextField(label: "Email", text: $user.email)
-                        .keyboardType(.emailAddress)
+                    FormTextField(label: "Email", text: Binding(
+                                            get: { user.email },
+                                            set: { user.email = $0.lowercased() } //
+                                        ))
+                                        .keyboardType(.emailAddress)
+                                        .autocapitalization(.none)
+                                        .textInputAutocapitalization(.never)
                     FormSecureField(label: "Password", text: $user.password)
                     FormSecureField(label: "Confirm Password", text: $confirmPassword)
                 }
@@ -77,10 +82,13 @@ struct SignUpView: View {
             
             guard let userID = authResult?.user.uid else { return }
             
+            // En SignUpView, dentro de registerUser():
             let userData = [
                 "firstName": user.firstName,
                 "email": user.email
             ]
+
+            databaseRef.child("users").child(userID).setValue(userData)
             
             databaseRef.child("users").child(userID).setValue(userData) { error, _ in
                 if let error = error {
