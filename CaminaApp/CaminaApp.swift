@@ -16,7 +16,7 @@ struct CaminaApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationBar()
+            LogInView()
         }
     }
 }
