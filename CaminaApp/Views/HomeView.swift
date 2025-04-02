@@ -71,7 +71,7 @@ struct HomeView: View {
     @StateObject private var locationManager = LocationManager()
     @State private var isShowingNotification = false
     @State private var searchText = ""
-    @State private var selectedCategory = "Todas"
+    @State private var selectedCategory = "All"
     @State private var selectedRestaurant: RestaurantLocation? = nil
     @State private var showingDetailSheet = false
     @State private var isShowingSearchResults = false
@@ -80,7 +80,7 @@ struct HomeView: View {
     @State private var userName: String = "Hi"
     
     let nearbyRestaurants = [
-        RestaurantLocation(name: "Santoua", coordinate: CLLocationCoordinate2D(latitude: 19.0418, longitude: -98.2055), description: "Restaurante japonés contemporáneo con sushi y ramen."),
+        RestaurantLocation(name: "Santoua", coordinate: CLLocationCoordinate2D(latitude: 19.0418, longitude: -98.2055), description: "Contemporary Japanese restaurant with sushi and ramen."),
         RestaurantLocation(name: "Cus Cus Cus", coordinate: CLLocationCoordinate2D(latitude: 19.0420, longitude: -98.2070), description: "Comida árabe y mediterránea en un ambiente acogedor.")
     ]
     
@@ -100,13 +100,12 @@ struct HomeView: View {
                     }
                     Spacer()
                 }
+                .padding(.top, 15) // espacio desde la parte superior
+                .padding(.horizontal) // espacio lateral
+
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    TextField("Vamos a comer...", text: $searchText,onCommit: {
-                        if !searchText.isEmpty {
-                            isShowingSearchResults = true
-                        }
-                    })
+                    TextField("Let's eat...", text: $searchText)
                         .padding()
                         .background(Color(.systemGray6))
                         .cornerRadius(12)
@@ -121,7 +120,7 @@ struct HomeView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
-                            ForEach(["Todas", "Hamburguesas", "Tacos", "Sushi", "Cafés"], id: \.self) { category in
+                            ForEach(["All", "Hamburguers", "Tacos", "Sushi", "Coffee"], id: \.self) { category in
                                 Button(action: {
                                     selectedCategory = category
                                 }) {
@@ -136,6 +135,7 @@ struct HomeView: View {
                         }
                         .padding(.horizontal)
                     }
+                    .padding(.vertical, 10)
                 }
                 .padding(.horizontal)
                 .padding()
