@@ -24,6 +24,8 @@ struct HomeView: View {
                 .padding()
                 
                 PlantOfTheDayView(plant: Tomato)
+                PopularNearbyView()
+
                 
                 RecentActivityView()
                 
@@ -38,6 +40,58 @@ struct HomeView: View {
             }
         }
         .accentColor(Color.primaryGreen)
+    }
+}
+struct PopularNearbyView: View {
+    struct Restaurant: Identifiable {
+        let id = UUID()
+        let image: Image
+        let name: String
+        let distance: String
+        let calories: String
+    }
+    
+    let restaurants: [Restaurant] = [
+        Restaurant(image: Image("restaurant1"), name: "Santoua", distance: "1.2 km", calories: "450 kcal"),
+        Restaurant(image: Image("restaurant2"), name: "Cus Cus Cus", distance: "850 m", calories: "520 kcal")
+    ]
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Populares cerca de ti")
+                .font(.title3)
+                .fontWeight(.semibold)
+                .padding(.horizontal)
+            
+            HStack(spacing: 16) {
+                ForEach(restaurants) { restaurant in
+                    VStack {
+                        restaurant.image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 160, height: 160)
+                            .cornerRadius(12)
+                            .clipped()
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(restaurant.name)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                            Text(restaurant.distance)
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                            Text(restaurant.calories)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding(.top, 5)
+                    }
+                    .frame(width: 160)
+                }
+            }
+            .padding(.horizontal)
+        }
+        .padding(.vertical)
     }
 }
 
