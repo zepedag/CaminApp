@@ -344,5 +344,6 @@ struct TipOfTheDayView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .navigationBarBackButtonHidden(true)
     }
 }

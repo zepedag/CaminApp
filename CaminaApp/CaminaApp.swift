@@ -2,7 +2,7 @@ import SwiftUI
 
 @main
 struct CaminaApp: App {
-    // Changing general appereance of standard components
+   
     init(){
         let appearance = UINavigationBarAppearance()
                 appearance.configureWithOpaqueBackground()

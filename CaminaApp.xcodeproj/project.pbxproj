@@ -45,6 +45,7 @@
 		E4189C8F2D9D136E005FA7C0 /* CaminaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189C8E2D9D136E005FA7C0 /* CaminaUITestsLaunchTests.swift */; };
 		E4189C902D9D136E005FA7C0 /* CaminaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189C8D2D9D136E005FA7C0 /* CaminaUITests.swift */; };
 		E4189C922D9D1415005FA7C0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189C912D9D1415005FA7C0 /* ProfileView.swift */; };
+		E4189C962D9D4B8D005FA7C0 /*  UserInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189C952D9D4B87005FA7C0 /*  UserInformationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 		E4189C8D2D9D136E005FA7C0 /* CaminaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminaUITests.swift; sourceTree = "<group>"; };
 		E4189C8E2D9D136E005FA7C0 /* CaminaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminaUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E4189C912D9D1415005FA7C0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		E4189C952D9D4B87005FA7C0 /*  UserInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " UserInformationView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -138,6 +140,7 @@
 		061572AC2B9244AF002F6ADD /* LogIn */ = {
 			isa = PBXGroup;
 			children = (
+				E4189C952D9D4B87005FA7C0 /*  UserInformationView.swift */,
 				061572AD2B9244EB002F6ADD /* LaunchView.swift */,
 				061572AF2B92450A002F6ADD /* LogInView.swift */,
 				061572B12B92451D002F6ADD /* SignUpView.swift */,
@@ -443,6 +446,7 @@
 				0640D1A22B9B66A9003726B1 /* CameraHandler.swift in Sources */,
 				061572B02B92450A002F6ADD /* LogInView.swift in Sources */,
 				AB200DD92B992873002DE93A /* PlantCardView.swift in Sources */,
+				E4189C962D9D4B8D005FA7C0 /*  UserInformationView.swift in Sources */,
 				E4189C922D9D1415005FA7C0 /* ProfileView.swift in Sources */,
 				061572C92B924E75002F6ADD /* PlantView.swift in Sources */,
 				AB200DD72B98EC7D002DE93A /* GeneralGardenView.swift in Sources */,

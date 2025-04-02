@@ -12,6 +12,7 @@ struct SignUpView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var showUserInfo = false
+    @State private var isShowingUserInfo = false
     
     var body: some View {
         NavigationStack {
@@ -21,7 +22,7 @@ struct SignUpView: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color.primaryGreen)
                     .padding(.top, 50)
-
+                
                 VStack(spacing: 16) {
                     FormTextField(label: "First Name", text: $user.firstName)
                     FormTextField(label: "Email", text: $user.email)
@@ -31,10 +32,15 @@ struct SignUpView: View {
                 }
                 .padding(.horizontal, 32)
                 
-                Button(action: validateRegistration) {
-                    Text("Sign Up")
+                Button(action: {
+                    isShowingUserInfo = true
+                }) {
+                    Text("Create Account")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
                         .frame(maxWidth: .infinity)
-                        .frame(height: 50)
+                        .padding(.horizontal)
                 }
                 .buttonStyle(PrimaryActionStyle())
                 .padding(.horizontal, 32)
@@ -47,13 +53,14 @@ struct SignUpView: View {
             } message: {
                 Text(alertMessage)
             }
-            .navigationDestination(isPresented: $showUserInfo) {
-                UserInformationView(user: user)
-            }
+           
         }
-        .tint(.primaryGreen)
+        .navigationDestination(isPresented: $isShowingUserInfo) {
+            UserInformationView(user: user)
+        }
+        .accentColor(Color.primaryGreen)
+        
     }
-    
     private func validateRegistration() {
         guard !user.password.isEmpty && user.password == confirmPassword else {
             alertMessage = "Passwords don't match"
@@ -62,58 +69,9 @@ struct SignUpView: View {
         }
         showUserInfo = true
     }
+        
 }
 
-struct UserInformationView: View {
-    @State private var age = ""
-    @State private var height = ""
-    @State private var weight = ""
-    @State private var isShowingNavBar = false
-    var user: UserData
-    
-    var body: some View {
-        VStack(spacing: 80) {
-            Text("Complete Your Profile")
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundColor(.primaryGreen)
-                .padding(.top, 50)
-
-            VStack(spacing: 16) {
-                FormNumberField(label: "Age", text: $age)
-                FormNumberField(label: "Height (M)", text: $height)
-                FormNumberField(label: "Weight (kg)", text: $weight)
-            }
-            .padding(.horizontal, 32)
-            
-            Button(action: {
-                completeRegistration()
-                isShowingNavBar = true
-            }) {
-                Text("Finish Setup")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .padding(.horizontal)
-            }
-            .buttonStyle(PrimaryActionStyle())
-            .padding(.horizontal, 32)
-            
-            Spacer()
-        }
-        .background(Color(.systemBackground))
-        .navigationDestination(isPresented: $isShowingNavBar) {
-            NavigationBar()
-        }
-        .accentColor(Color.primaryGreen)
-    }
-    
-    private func completeRegistration() {
-        print("User registered: \(user.firstName)")
-        print("Additional info: Age \(age), Height \(height), Weight \(weight)")
-    }
-}
 
 struct FormTextField: View {
     let label: String
@@ -151,24 +109,6 @@ struct FormSecureField: View {
     }
 }
 
-struct FormNumberField: View {
-    let label: String
-    @Binding var text: String
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(label)
-                .font(.body)
-                .foregroundColor(.primary)
-            
-            TextField("", text: $text)
-                .keyboardType(.numberPad)
-                .padding()
-                .background(Color.cream)
-                .cornerRadius(8)
-        }
-    }
-}
 
 struct PrimaryActionStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
@@ -184,3 +124,5 @@ struct PrimaryActionStyle: ButtonStyle {
 #Preview {
     SignUpView()
 }
+
+
