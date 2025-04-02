@@ -9,6 +9,15 @@ struct SocialGeneralView: View {
                     
                     // Círculos de progreso
                     DashboardSection()
+                    
+                    // Actividad social rediseñada con tarjetas visuales
+                    SocialCardView(title: "Friends' Activity", icon: "person.2.fill") {
+                        VStack(spacing: 12) {
+                            ActivityCard(username: "Sofía", action: "reviewed", target: "Ramen House", icon: "pencil", color: .blue)
+                            ActivityCard(username: "Luis", action: "favorited", target: "Tacos El Güero", icon: "bookmark.fill", color: .orange)
+                            ActivityCard(username: "Diego", action: "visited", target: "Pizza Urbana", icon: "location.fill", color: .green)
+                        }
+                    }
 
                     // Gráfico de barras
                     SocialCardView(title: "Reviews by Category", icon: "chart.bar") {
@@ -47,17 +56,6 @@ struct SocialGeneralView: View {
                                 )
                             }
                             .padding(.vertical, 4)
-                        }
-                    }
-
-
-
-                    // Actividad social rediseñada con tarjetas visuales
-                    SocialCardView(title: "Friends' Activity", icon: "person.2.fill") {
-                        VStack(spacing: 12) {
-                            ActivityCard(username: "Sofía", action: "reviewed", target: "Ramen House", icon: "pencil", color: .blue)
-                            ActivityCard(username: "Luis", action: "favorited", target: "Tacos El Güero", icon: "bookmark.fill", color: .orange)
-                            ActivityCard(username: "Diego", action: "visited", target: "Pizza Urbana", icon: "location.fill", color: .green)
                         }
                     }
 
