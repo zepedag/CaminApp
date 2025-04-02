@@ -2,7 +2,7 @@ import SwiftUI
 import MapKit
 
 struct RestaurantDetailView: View {
-    let restaurant: Restaurant
+    let restaurant: Restaurants
     let userLocation: CLLocationCoordinate2D
 
     var distanceInKm: Double {
@@ -162,7 +162,7 @@ struct RestaurantDetailView: View {
 }
 
 // Ejemplo de modelos necesarios
-struct Restaurant: Identifiable {
+struct Restaurants: Identifiable {
     let id = UUID()
     let name: String
     let description: String
@@ -194,7 +194,7 @@ struct Review: Identifiable {
 }
 
 #Preview {
-    let sampleRestaurant = Restaurant(
+    let sampleRestaurant = Restaurants(
         name: "Casa Cholula",
         description: "Traditional Mexican food with a modern twist.",
         image: Image(systemName: "photo"),
