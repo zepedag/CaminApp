@@ -24,9 +24,9 @@ struct HomeView: View {
                 .padding()
                 
                 PlantOfTheDayView(plant: Tomato)
+                
                 PopularNearbyView()
 
-                
                 RecentActivityView()
                 
                 TipOfTheDayView()
@@ -65,7 +65,7 @@ struct PopularNearbyView: View {
             
             HStack(spacing: 16) {
                 ForEach(restaurants) { restaurant in
-                    VStack {
+                    VStack(alignment: .leading) {
                         restaurant.image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -73,7 +73,7 @@ struct PopularNearbyView: View {
                             .cornerRadius(12)
                             .clipped()
                         
-                        VStack(alignment: .leading, spacing: 4) {
+                        VStack(alignment: .leading) {
                             Text(restaurant.name)
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)
@@ -84,6 +84,7 @@ struct PopularNearbyView: View {
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 5)
                     }
                     .frame(width: 160)
@@ -94,7 +95,6 @@ struct PopularNearbyView: View {
         .padding(.vertical)
     }
 }
-
 struct PlantOfTheDayView: View {
     @State private var navigateToPlantView = false
     var plant: Plant // Parámetro para los datos de la planta
