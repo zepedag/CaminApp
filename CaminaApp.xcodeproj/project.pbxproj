@@ -1,0 +1,777 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		061572AE2B9244EB002F6ADD /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061572AD2B9244EB002F6ADD /* LaunchView.swift */; };
+		061572B02B92450A002F6ADD /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061572AF2B92450A002F6ADD /* LogInView.swift */; };
+		061572B22B92451D002F6ADD /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061572B12B92451D002F6ADD /* SignUpView.swift */; };
+		061572B82B924BB2002F6ADD /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061572B72B924BB2002F6ADD /* Colors.swift */; };
+		061572BF2B924DD7002F6ADD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061572BE2B924DD7002F6ADD /* User.swift */; };
+		061572C12B924DE8002F6ADD /* Garden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061572C02B924DE8002F6ADD /* Garden.swift */; };
+		061572C32B924DF1002F6ADD /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061572C22B924DF1002F6ADD /* Plant.swift */; };
+		061572C52B924E30002F6ADD /* GardenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061572C42B924E30002F6ADD /* GardenView.swift */; };
+		061572C72B924E50002F6ADD /* CollectionGardenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061572C62B924E50002F6ADD /* CollectionGardenView.swift */; };
+		061572C92B924E75002F6ADD /* PlantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061572C82B924E75002F6ADD /* PlantView.swift */; };
+		061572CB2B924E87002F6ADD /* GeneralPlantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061572CA2B924E87002F6ADD /* GeneralPlantView.swift */; };
+		0640D1542B9A41DD003726B1 /* Pro.reality in Resources */ = {isa = PBXBuildFile; fileRef = 0640D1532B9A41DD003726B1 /* Pro.reality */; };
+		0640D1552B9A41DD003726B1 /* Pro.reality in Resources */ = {isa = PBXBuildFile; fileRef = 0640D1532B9A41DD003726B1 /* Pro.reality */; };
+		0640D1562B9A41DD003726B1 /* Pro.reality in Resources */ = {isa = PBXBuildFile; fileRef = 0640D1532B9A41DD003726B1 /* Pro.reality */; };
+		0640D19E2B9A8615003726B1 /* Pot.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 0640D19D2B9A8615003726B1 /* Pot.rcproject */; };
+		0640D1A02B9A8620003726B1 /* Pot.rcproject 3 in Resources */ = {isa = PBXBuildFile; fileRef = 0640D19F2B9A8620003726B1 /* Pot.rcproject 3 */; };
+		0640D1A22B9B66A9003726B1 /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640D1A12B9B66A9003726B1 /* CameraHandler.swift */; };
+		06D181A32B92378A00352475 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D181A22B92378A00352475 /* HomeView.swift */; };
+		06D181A52B92378B00352475 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06D181A42B92378B00352475 /* Assets.xcassets */; };
+		06D181A82B92378B00352475 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06D181A72B92378B00352475 /* Preview Assets.xcassets */; };
+		AB1D13842B928A9F0025EFFA /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1D13832B928A9F0025EFFA /* NavigationBar.swift */; };
+		AB1D13862B9382590025EFFA /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1D13852B9382590025EFFA /* NotificationView.swift */; };
+		AB1D138A2B9384740025EFFA /* GardenCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1D13892B9384740025EFFA /* GardenCardView.swift */; };
+		AB1D138C2B9395030025EFFA /* PlantMiniCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1D138B2B9395030025EFFA /* PlantMiniCardView.swift */; };
+		AB1D138E2B93998A0025EFFA /* NewPlantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1D138D2B93998A0025EFFA /* NewPlantView.swift */; };
+		AB1D13902B939CEA0025EFFA /* NewGardenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1D138F2B939CEA0025EFFA /* NewGardenView.swift */; };
+		AB1D13922B93B6620025EFFA /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1D13912B93B6620025EFFA /* General.swift */; };
+		AB1D13942B9560130025EFFA /* TreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1D13932B9560130025EFFA /* TreeView.swift */; };
+		AB1D139D2B9582690025EFFA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1D139C2B9582690025EFFA /* SettingsView.swift */; };
+		AB1D139F2B95A2F30025EFFA /* EditPlantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1D139E2B95A2F30025EFFA /* EditPlantView.swift */; };
+		AB200DD72B98EC7D002DE93A /* GeneralGardenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB200DD62B98EC7D002DE93A /* GeneralGardenView.swift */; };
+		AB200DD92B992873002DE93A /* PlantCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB200DD82B992873002DE93A /* PlantCardView.swift */; };
+		AB200DDB2B9B731B002DE93A /* PlantStagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB200DDA2B9B731B002DE93A /* PlantStagesView.swift */; };
+		E4189C8A2D9D134E005FA7C0 /* CaminaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189C892D9D134E005FA7C0 /* CaminaApp.swift */; };
+		E4189C8C2D9D1360005FA7C0 /* CaminaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189C8B2D9D1360005FA7C0 /* CaminaTests.swift */; };
+		E4189C8F2D9D136E005FA7C0 /* CaminaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189C8E2D9D136E005FA7C0 /* CaminaUITestsLaunchTests.swift */; };
+		E4189C902D9D136E005FA7C0 /* CaminaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189C8D2D9D136E005FA7C0 /* CaminaUITests.swift */; };
+		E4189C922D9D1415005FA7C0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189C912D9D1415005FA7C0 /* ProfileView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		06D181AE2B92378B00352475 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 06D181952B92378A00352475 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 06D1819C2B92378A00352475;
+			remoteInfo = Huertos;
+		};
+		06D181B82B92378B00352475 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 06D181952B92378A00352475 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 06D1819C2B92378A00352475;
+			remoteInfo = Huertos;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		061572AD2B9244EB002F6ADD /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		061572AF2B92450A002F6ADD /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		061572B12B92451D002F6ADD /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		061572B72B924BB2002F6ADD /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		061572BE2B924DD7002F6ADD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		061572C02B924DE8002F6ADD /* Garden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garden.swift; sourceTree = "<group>"; };
+		061572C22B924DF1002F6ADD /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
+		061572C42B924E30002F6ADD /* GardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenView.swift; sourceTree = "<group>"; };
+		061572C62B924E50002F6ADD /* CollectionGardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionGardenView.swift; sourceTree = "<group>"; };
+		061572C82B924E75002F6ADD /* PlantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantView.swift; sourceTree = "<group>"; };
+		061572CA2B924E87002F6ADD /* GeneralPlantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPlantView.swift; sourceTree = "<group>"; };
+		0640D1532B9A41DD003726B1 /* Pro.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pro.reality; sourceTree = "<group>"; };
+		0640D19D2B9A8615003726B1 /* Pot.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Pot.rcproject; sourceTree = "<group>"; };
+		0640D19F2B9A8620003726B1 /* Pot.rcproject 3 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Pot.rcproject 3"; sourceTree = "<group>"; };
+		0640D1A12B9B66A9003726B1 /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
+		06D1819D2B92378A00352475 /* CaminaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaminaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		06D181A22B92378A00352475 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		06D181A42B92378B00352475 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		06D181A72B92378B00352475 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		06D181AD2B92378B00352475 /* CaminaAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaminaAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		06D181B72B92378B00352475 /* CaminaAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaminaAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB1D13832B928A9F0025EFFA /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		AB1D13852B9382590025EFFA /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		AB1D13892B9384740025EFFA /* GardenCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenCardView.swift; sourceTree = "<group>"; };
+		AB1D138B2B9395030025EFFA /* PlantMiniCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantMiniCardView.swift; sourceTree = "<group>"; };
+		AB1D138D2B93998A0025EFFA /* NewPlantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlantView.swift; sourceTree = "<group>"; };
+		AB1D138F2B939CEA0025EFFA /* NewGardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGardenView.swift; sourceTree = "<group>"; };
+		AB1D13912B93B6620025EFFA /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
+		AB1D13932B9560130025EFFA /* TreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeView.swift; sourceTree = "<group>"; };
+		AB1D139C2B9582690025EFFA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AB1D139E2B95A2F30025EFFA /* EditPlantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantView.swift; sourceTree = "<group>"; };
+		AB200DD62B98EC7D002DE93A /* GeneralGardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralGardenView.swift; sourceTree = "<group>"; };
+		AB200DD82B992873002DE93A /* PlantCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCardView.swift; sourceTree = "<group>"; };
+		AB200DDA2B9B731B002DE93A /* PlantStagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantStagesView.swift; sourceTree = "<group>"; };
+		E4189C892D9D134E005FA7C0 /* CaminaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminaApp.swift; sourceTree = "<group>"; };
+		E4189C8B2D9D1360005FA7C0 /* CaminaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminaTests.swift; sourceTree = "<group>"; };
+		E4189C8D2D9D136E005FA7C0 /* CaminaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminaUITests.swift; sourceTree = "<group>"; };
+		E4189C8E2D9D136E005FA7C0 /* CaminaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E4189C912D9D1415005FA7C0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		06D1819A2B92378A00352475 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06D181AA2B92378B00352475 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06D181B42B92378B00352475 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		061572AC2B9244AF002F6ADD /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				061572AD2B9244EB002F6ADD /* LaunchView.swift */,
+				061572AF2B92450A002F6ADD /* LogInView.swift */,
+				061572B12B92451D002F6ADD /* SignUpView.swift */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
+		061572B42B9246A6002F6ADD /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				061572BE2B924DD7002F6ADD /* User.swift */,
+				061572C02B924DE8002F6ADD /* Garden.swift */,
+				061572C22B924DF1002F6ADD /* Plant.swift */,
+				AB1D13912B93B6620025EFFA /* General.swift */,
+			);
+			path = DataModels;
+			sourceTree = "<group>";
+		};
+		061572B52B9246C8002F6ADD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AB1D139B2B9582570025EFFA /* Profile */,
+				06D181A22B92378A00352475 /* HomeView.swift */,
+				061572BB2B924CC8002F6ADD /* Plant */,
+				061572B92B924CAF002F6ADD /* Garden */,
+				061572AC2B9244AF002F6ADD /* LogIn */,
+				AB1D13832B928A9F0025EFFA /* NavigationBar.swift */,
+				AB1D13852B9382590025EFFA /* NotificationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		061572B62B924B90002F6ADD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				06D181A42B92378B00352475 /* Assets.xcassets */,
+				061572B72B924BB2002F6ADD /* Colors.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		061572B92B924CAF002F6ADD /* Garden */ = {
+			isa = PBXGroup;
+			children = (
+				061572C42B924E30002F6ADD /* GardenView.swift */,
+				061572C62B924E50002F6ADD /* CollectionGardenView.swift */,
+				AB200DD62B98EC7D002DE93A /* GeneralGardenView.swift */,
+				AB1D13892B9384740025EFFA /* GardenCardView.swift */,
+				AB1D138F2B939CEA0025EFFA /* NewGardenView.swift */,
+			);
+			path = Garden;
+			sourceTree = "<group>";
+		};
+		061572BB2B924CC8002F6ADD /* Plant */ = {
+			isa = PBXGroup;
+			children = (
+				061572C82B924E75002F6ADD /* PlantView.swift */,
+				061572CA2B924E87002F6ADD /* GeneralPlantView.swift */,
+				AB1D138B2B9395030025EFFA /* PlantMiniCardView.swift */,
+				AB200DD82B992873002DE93A /* PlantCardView.swift */,
+				AB1D138D2B93998A0025EFFA /* NewPlantView.swift */,
+				AB1D13932B9560130025EFFA /* TreeView.swift */,
+				AB1D139E2B95A2F30025EFFA /* EditPlantView.swift */,
+				AB200DDA2B9B731B002DE93A /* PlantStagesView.swift */,
+			);
+			path = Plant;
+			sourceTree = "<group>";
+		};
+		0640D1482B9A31D8003726B1 /* VirtualReality */ = {
+			isa = PBXGroup;
+			children = (
+				0640D19F2B9A8620003726B1 /* Pot.rcproject 3 */,
+				0640D19D2B9A8615003726B1 /* Pot.rcproject */,
+				0640D1532B9A41DD003726B1 /* Pro.reality */,
+				0640D1A12B9B66A9003726B1 /* CameraHandler.swift */,
+			);
+			path = VirtualReality;
+			sourceTree = "<group>";
+		};
+		06D181942B92378A00352475 = {
+			isa = PBXGroup;
+			children = (
+				06D1819F2B92378A00352475 /* CaminaApp */,
+				06D181B02B92378B00352475 /* CaminaTests */,
+				06D181BA2B92378B00352475 /* CaminaUITests */,
+				06D1819E2B92378A00352475 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		06D1819E2B92378A00352475 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				06D1819D2B92378A00352475 /* CaminaApp.app */,
+				06D181AD2B92378B00352475 /* CaminaAppTests.xctest */,
+				06D181B72B92378B00352475 /* CaminaAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		06D1819F2B92378A00352475 /* CaminaApp */ = {
+			isa = PBXGroup;
+			children = (
+				E4189C892D9D134E005FA7C0 /* CaminaApp.swift */,
+				0640D1482B9A31D8003726B1 /* VirtualReality */,
+				061572B62B924B90002F6ADD /* Resources */,
+				061572B52B9246C8002F6ADD /* Views */,
+				061572B42B9246A6002F6ADD /* DataModels */,
+				06D181A62B92378B00352475 /* Preview Content */,
+			);
+			path = CaminaApp;
+			sourceTree = "<group>";
+		};
+		06D181A62B92378B00352475 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				06D181A72B92378B00352475 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		06D181B02B92378B00352475 /* CaminaTests */ = {
+			isa = PBXGroup;
+			children = (
+				E4189C8B2D9D1360005FA7C0 /* CaminaTests.swift */,
+			);
+			path = CaminaTests;
+			sourceTree = "<group>";
+		};
+		06D181BA2B92378B00352475 /* CaminaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E4189C8D2D9D136E005FA7C0 /* CaminaUITests.swift */,
+				E4189C8E2D9D136E005FA7C0 /* CaminaUITestsLaunchTests.swift */,
+			);
+			path = CaminaUITests;
+			sourceTree = "<group>";
+		};
+		AB1D139B2B9582570025EFFA /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				E4189C912D9D1415005FA7C0 /* ProfileView.swift */,
+				AB1D139C2B9582690025EFFA /* SettingsView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		06D1819C2B92378A00352475 /* CaminaApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06D181C12B92378B00352475 /* Build configuration list for PBXNativeTarget "CaminaApp" */;
+			buildPhases = (
+				06D181992B92378A00352475 /* Sources */,
+				06D1819A2B92378A00352475 /* Frameworks */,
+				06D1819B2B92378A00352475 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CaminaApp;
+			productName = Huertos;
+			productReference = 06D1819D2B92378A00352475 /* CaminaApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		06D181AC2B92378B00352475 /* CaminaAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06D181C42B92378B00352475 /* Build configuration list for PBXNativeTarget "CaminaAppTests" */;
+			buildPhases = (
+				06D181A92B92378B00352475 /* Sources */,
+				06D181AA2B92378B00352475 /* Frameworks */,
+				06D181AB2B92378B00352475 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				06D181AF2B92378B00352475 /* PBXTargetDependency */,
+			);
+			name = CaminaAppTests;
+			productName = HuertosTests;
+			productReference = 06D181AD2B92378B00352475 /* CaminaAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		06D181B62B92378B00352475 /* CaminaAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06D181C72B92378B00352475 /* Build configuration list for PBXNativeTarget "CaminaAppUITests" */;
+			buildPhases = (
+				06D181B32B92378B00352475 /* Sources */,
+				06D181B42B92378B00352475 /* Frameworks */,
+				06D181B52B92378B00352475 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				06D181B92B92378B00352475 /* PBXTargetDependency */,
+			);
+			name = CaminaAppUITests;
+			productName = HuertosUITests;
+			productReference = 06D181B72B92378B00352475 /* CaminaAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		06D181952B92378A00352475 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					06D1819C2B92378A00352475 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					06D181AC2B92378B00352475 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 06D1819C2B92378A00352475;
+					};
+					06D181B62B92378B00352475 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 06D1819C2B92378A00352475;
+					};
+				};
+			};
+			buildConfigurationList = 06D181982B92378A00352475 /* Build configuration list for PBXProject "CaminaApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 06D181942B92378A00352475;
+			productRefGroup = 06D1819E2B92378A00352475 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				06D1819C2B92378A00352475 /* CaminaApp */,
+				06D181AC2B92378B00352475 /* CaminaAppTests */,
+				06D181B62B92378B00352475 /* CaminaAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		06D1819B2B92378A00352475 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0640D1542B9A41DD003726B1 /* Pro.reality in Resources */,
+				06D181A82B92378B00352475 /* Preview Assets.xcassets in Resources */,
+				06D181A52B92378B00352475 /* Assets.xcassets in Resources */,
+				0640D1A02B9A8620003726B1 /* Pot.rcproject 3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06D181AB2B92378B00352475 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0640D1552B9A41DD003726B1 /* Pro.reality in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06D181B52B92378B00352475 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0640D1562B9A41DD003726B1 /* Pro.reality in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		06D181992B92378A00352475 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB1D13902B939CEA0025EFFA /* NewGardenView.swift in Sources */,
+				AB1D139D2B9582690025EFFA /* SettingsView.swift in Sources */,
+				061572CB2B924E87002F6ADD /* GeneralPlantView.swift in Sources */,
+				061572C12B924DE8002F6ADD /* Garden.swift in Sources */,
+				061572C32B924DF1002F6ADD /* Plant.swift in Sources */,
+				AB1D13842B928A9F0025EFFA /* NavigationBar.swift in Sources */,
+				0640D19E2B9A8615003726B1 /* Pot.rcproject in Sources */,
+				AB1D139F2B95A2F30025EFFA /* EditPlantView.swift in Sources */,
+				06D181A32B92378A00352475 /* HomeView.swift in Sources */,
+				061572C52B924E30002F6ADD /* GardenView.swift in Sources */,
+				AB1D138C2B9395030025EFFA /* PlantMiniCardView.swift in Sources */,
+				AB1D13862B9382590025EFFA /* NotificationView.swift in Sources */,
+				AB200DDB2B9B731B002DE93A /* PlantStagesView.swift in Sources */,
+				061572B82B924BB2002F6ADD /* Colors.swift in Sources */,
+				061572B22B92451D002F6ADD /* SignUpView.swift in Sources */,
+				AB1D13922B93B6620025EFFA /* General.swift in Sources */,
+				061572AE2B9244EB002F6ADD /* LaunchView.swift in Sources */,
+				AB1D138A2B9384740025EFFA /* GardenCardView.swift in Sources */,
+				0640D1A22B9B66A9003726B1 /* CameraHandler.swift in Sources */,
+				061572B02B92450A002F6ADD /* LogInView.swift in Sources */,
+				AB200DD92B992873002DE93A /* PlantCardView.swift in Sources */,
+				E4189C922D9D1415005FA7C0 /* ProfileView.swift in Sources */,
+				061572C92B924E75002F6ADD /* PlantView.swift in Sources */,
+				AB200DD72B98EC7D002DE93A /* GeneralGardenView.swift in Sources */,
+				061572C72B924E50002F6ADD /* CollectionGardenView.swift in Sources */,
+				AB1D138E2B93998A0025EFFA /* NewPlantView.swift in Sources */,
+				AB1D13942B9560130025EFFA /* TreeView.swift in Sources */,
+				E4189C8A2D9D134E005FA7C0 /* CaminaApp.swift in Sources */,
+				061572BF2B924DD7002F6ADD /* User.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06D181A92B92378B00352475 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4189C8C2D9D1360005FA7C0 /* CaminaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06D181B32B92378B00352475 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4189C8F2D9D136E005FA7C0 /* CaminaUITestsLaunchTests.swift in Sources */,
+				E4189C902D9D136E005FA7C0 /* CaminaUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		06D181AF2B92378B00352475 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 06D1819C2B92378A00352475 /* CaminaApp */;
+			targetProxy = 06D181AE2B92378B00352475 /* PBXContainerItemProxy */;
+		};
+		06D181B92B92378B00352475 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 06D1819C2B92378A00352475 /* CaminaApp */;
+			targetProxy = 06D181B82B92378B00352475 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		06D181BF2B92378B00352475 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		06D181C02B92378B00352475 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		06D181C22B92378B00352475 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CaminaApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 24YJWTXPPD;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Verdant;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"Camera is needed for AR experience\"";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ICapys.Verdant;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		06D181C32B92378B00352475 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CaminaApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 24YJWTXPPD;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Verdant;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"Camera is needed for AR experience\"";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ICapys.Verdant;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		06D181C52B92378B00352475 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ICapys.HuertosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CaminaApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CaminaApp";
+			};
+			name = Debug;
+		};
+		06D181C62B92378B00352475 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ICapys.HuertosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CaminaApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CaminaApp";
+			};
+			name = Release;
+		};
+		06D181C82B92378B00352475 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ICapys.HuertosUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Huertos;
+			};
+			name = Debug;
+		};
+		06D181C92B92378B00352475 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ICapys.HuertosUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Huertos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		06D181982B92378A00352475 /* Build configuration list for PBXProject "CaminaApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06D181BF2B92378B00352475 /* Debug */,
+				06D181C02B92378B00352475 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06D181C12B92378B00352475 /* Build configuration list for PBXNativeTarget "CaminaApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06D181C22B92378B00352475 /* Debug */,
+				06D181C32B92378B00352475 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06D181C42B92378B00352475 /* Build configuration list for PBXNativeTarget "CaminaAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06D181C52B92378B00352475 /* Debug */,
+				06D181C62B92378B00352475 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06D181C72B92378B00352475 /* Build configuration list for PBXNativeTarget "CaminaAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06D181C82B92378B00352475 /* Debug */,
+				06D181C92B92378B00352475 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 06D181952B92378A00352475 /* Project object */;
+}
