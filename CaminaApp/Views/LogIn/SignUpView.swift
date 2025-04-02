@@ -1,4 +1,6 @@
 import SwiftUI
+import FirebaseAuth
+import FirebaseDatabase
 
 struct UserData {
     var firstName: String = ""
@@ -7,22 +9,23 @@ struct UserData {
 }
 
 struct SignUpView: View {
-    @State private var user = UserData()
+    @State public var user = UserData()
     @State private var confirmPassword = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
-    @State private var showUserInfo = false
     @State private var isShowingUserInfo = false
     
+    public var databaseRef: DatabaseReference = Database.database().reference()
+
     var body: some View {
         NavigationStack {
-            VStack(spacing: 60) {
+            VStack(spacing: 40) {
                 Text("Create an Account")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.primaryGreen)
                     .padding(.top, 50)
-                
+
                 VStack(spacing: 16) {
                     FormTextField(label: "First Name", text: $user.firstName)
                     FormTextField(label: "Email", text: $user.email)
@@ -31,10 +34,8 @@ struct SignUpView: View {
                     FormSecureField(label: "Confirm Password", text: $confirmPassword)
                 }
                 .padding(.horizontal, 32)
-                
-                Button(action: {
-                    isShowingUserInfo = true
-                }) {
+
+                Button(action: registerUser) {
                     Text("Create Account")
                         .foregroundColor(.white)
                         .font(.headline)
@@ -44,7 +45,7 @@ struct SignUpView: View {
                 }
                 .buttonStyle(PrimaryActionStyle())
                 .padding(.horizontal, 32)
-                
+
                 Spacer()
             }
             .background(Color(.systemBackground))
@@ -53,36 +54,57 @@ struct SignUpView: View {
             } message: {
                 Text(alertMessage)
             }
-           
         }
         .navigationDestination(isPresented: $isShowingUserInfo) {
             UserInformationView(user: user)
         }
         .accentColor(Color.primaryGreen)
-        
     }
-    private func validateRegistration() {
-        guard !user.password.isEmpty && user.password == confirmPassword else {
+    
+    private func registerUser() {
+        guard !user.password.isEmpty, user.password == confirmPassword else {
             alertMessage = "Passwords don't match"
             showAlert = true
             return
         }
-        showUserInfo = true
-    }
         
+        Auth.auth().createUser(withEmail: user.email, password: user.password) { authResult, error in
+            if let error = error {
+                alertMessage = "Error: \(error.localizedDescription)"
+                showAlert = true
+                return
+            }
+            
+            guard let userID = authResult?.user.uid else { return }
+            
+            let userData = [
+                "firstName": user.firstName,
+                "email": user.email
+            ]
+            
+            databaseRef.child("users").child(userID).setValue(userData) { error, _ in
+                if let error = error {
+                    alertMessage = "Database error: \(error.localizedDescription)"
+                    showAlert = true
+                } else {
+                    isShowingUserInfo = true
+                }
+            }
+        }
+    }
 }
 
-
+// Reutilización de componentes de UI
 struct FormTextField: View {
     let label: String
     @Binding var text: String
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(label)
                 .font(.body)
                 .foregroundColor(.primary)
-            
+
             TextField("", text: $text)
                 .padding()
                 .background(Color.cream)
@@ -94,13 +116,13 @@ struct FormTextField: View {
 struct FormSecureField: View {
     let label: String
     @Binding var text: String
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(label)
                 .font(.body)
                 .foregroundColor(.primary)
-            
+
             SecureField("", text: $text)
                 .padding()
                 .background(Color.cream)
@@ -108,7 +130,6 @@ struct FormSecureField: View {
         }
     }
 }
-
 
 struct PrimaryActionStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
@@ -124,5 +145,3 @@ struct PrimaryActionStyle: ButtonStyle {
 #Preview {
     SignUpView()
 }
-
-
