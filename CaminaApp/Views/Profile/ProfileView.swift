@@ -1,4 +1,5 @@
 import SwiftUI
+import Charts
 
 struct ProfileView: View {
     var user: User
@@ -60,12 +61,45 @@ struct ProfileView: View {
                     }
                     .padding()
                     
-                    // Badges
-                    HStack(spacing: 15) {
-                        BadgeView(text: "Gardener Pro")
-                        BadgeView(text: "Plant Lover")
+                    // Achievements Section
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Achievements")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding(.leading, 10)
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                AchievementView(icon:"figure.walk",text: "10,000\nSteps", color: .white)
+                                AchievementView2(icon: "leaf.fill", text: "Vegan for\na Week", color: .white)
+                                AchievementView3(icon: "fork.knife", text: "Tried 50\nDishes", color: .white)
+                                AchievementView4(icon: "cup.and.saucer.fill", text: "Coffee\nEnthusiast", color: .white)
+                                                            
+                            }
+                            .padding(.horizontal)
+                        }
                     }
-                    .padding(.top, 0)
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Progress Overview")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding(.leading, 10)
+                            .padding(.top, 20)
+                                           
+                        Chart {
+                            BarMark(x: .value("Category", "Steps"), y: .value("Progress", 80))
+                                .foregroundStyle(.blue)
+                            BarMark(x: .value("Category", "Vegan"), y: .value("Progress", 60))
+                                .foregroundStyle(.green)
+                            BarMark(x: .value("Category", "Dishes"), y: .value("Progress", 75))
+                                .foregroundStyle(.orange)
+                            BarMark(x: .value("Category", "Coffee"), y: .value("Progress", 90))
+                                .foregroundStyle(.brown)
+                        }
+                        .frame(height: 200)
+                        .padding(.horizontal, 20)
+                }
                 }
                 .padding()
             }
@@ -78,33 +112,111 @@ struct ProfileView: View {
         }
         .accentColor(Color.primaryGreen)
     }
-    
 }
 
-// Mantenemos BadgeView igual por simplicidad y consistencia
-struct BadgeView: View {
+// Achievement View
+struct AchievementView: View {
+    let icon: String
     let text: String
+    let color: Color
     
     var body: some View {
-        Text(text)
-            .font(.caption)
-            .fontWeight(.medium)
-            .padding(8)
-            .background(Color.green.opacity(0.1))
-            .cornerRadius(10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.primaryGreen, lineWidth: 2)
-            )
+        VStack(spacing: 5) {
+            ZStack {
+                Circle()
+                    .fill(Color.mustardYellow)
+                    .frame(width: 60, height: 60)
+                Image(systemName: icon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(color)
+            }
+            Text(text)
+                .font(.caption)
+                .fontWeight(.medium)
+                .multilineTextAlignment(.center)
+        }
     }
 }
-
-
+struct AchievementView2: View {
+    let icon: String
+    let text: String
+    let color: Color
+    
+    var body: some View {
+        VStack(spacing: 5) {
+            ZStack {
+                Circle()
+                    .fill(Color.deepBlue)
+                    .frame(width: 60, height: 60)
+                Image(systemName: icon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(color)
+            }
+            Text(text)
+                .font(.caption)
+                .fontWeight(.medium)
+                .multilineTextAlignment(.center)
+        }
+    }
+}
+struct AchievementView3: View {
+    let icon: String
+    let text: String
+    let color: Color
+    
+    var body: some View {
+        VStack(spacing: 5) {
+            ZStack {
+                Circle()
+                    .fill(Color.opaqueRed)
+                    .frame(width: 60, height: 60)
+                Image(systemName: icon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(color)
+            }
+            Text(text)
+                .font(.caption)
+                .fontWeight(.medium)
+                .multilineTextAlignment(.center)
+        }
+    }
+}
+struct AchievementView4: View {
+    let icon: String
+    let text: String
+    let color: Color
+    
+    var body: some View {
+        VStack(spacing: 5) {
+            ZStack {
+                Circle()
+                    .fill(Color.lightGreen)
+                    .frame(width: 60, height: 60)
+                Image(systemName: icon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(color)
+            }
+            Text(text)
+                .font(.caption)
+                .fontWeight(.medium)
+                .multilineTextAlignment(.center)
+        }
+    }
+}
 
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
         let exampleUsers = generateExampleUsers()
-        ProfileView(user: exampleUsers.first!) // Utilizamos el primer usuario generado para el preview
+        ProfileView(user: exampleUsers.first!)
             .previewLayout(.sizeThatFits)
     }
 }
+
