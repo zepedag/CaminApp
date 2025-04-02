@@ -1,18 +1,48 @@
-//
-//  SwiftUIView.swift
-//  CaminaApp
-//
-//  Created by Emi on 02/04/25.
-//
-
 import SwiftUI
 
-struct SwiftUIView: View {
+struct CalorieComparisonView: View {
+    let percentage: Double
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Circle()
+                .stroke(lineWidth: 8)
+                .opacity(0.2)
+                .foregroundColor(.gray)
+            
+            Circle()
+                .trim(from: 0.0, to: CGFloat(min(percentage, 1.0)))
+                .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
+                .foregroundColor(percentage >= 1.0 ? .green : .primaryGreen)
+                .rotationEffect(Angle(degrees: -90))
+                .animation(.easeOut, value: percentage)
+            
+            VStack {
+                Text("\(Int(percentage * 100))%")
+                    .font(.system(size: 12, weight: .bold))
+                Text("quemado")
+                    .font(.system(size: 8))
+            }
+        }
     }
 }
 
-#Preview {
-    SwiftUIView()
+struct NutritionBadge: View {
+    let value: String
+    let label: String
+    let color: Color
+    
+    var body: some View {
+        VStack {
+            Text(value)
+                .font(.system(size: 12, weight: .bold))
+                .foregroundColor(color)
+            Text(label)
+                .font(.system(size: 10))
+                .foregroundColor(.gray)
+        }
+        .padding(6)
+        .background(color.opacity(0.1))
+        .cornerRadius(8)
+    }
 }
