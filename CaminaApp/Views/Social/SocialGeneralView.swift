@@ -22,27 +22,45 @@ struct SocialGeneralView: View {
                             .cornerRadius(12)
                     }
 
-                    // Logros
                     SocialCardView(title: "Achievements", icon: "rosette") {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("🏅 Foodie Rookie")
-                            Text("🏅 Explorer LVL 2")
-                            Text("🏅 Top Reviewer")
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 12) {
+                                AchievementBadge(
+                                    title: "Foodie Rookie",
+                                    icon: "leaf.fill",
+                                    badgeColor: Color(red: 0.2, green: 0.6, blue: 0.3),
+                                    iconColor: Color(red: 0.13, green: 0.5, blue: 0.22)
+                                )
+
+                                AchievementBadge(
+                                    title: "Explorer LVL 2",
+                                    icon: "map.fill",
+                                    badgeColor: Color.blue.opacity(0.85),
+                                    iconColor: Color.indigo
+                                )
+
+                                AchievementBadge(
+                                    title: "Top Reviewer",
+                                    icon: "star.fill",
+                                    badgeColor: Color.primaryGreen.opacity(0.3),
+                                    iconColor: Color(red: 0.85, green: 0.4, blue: 0.1)
+                                )
+                            }
+                            .padding(.vertical, 4)
                         }
-                        .font(.body)
-                        .foregroundColor(.primaryGreen)
                     }
 
-                    // Actividad social
+
+
+                    // Actividad social rediseñada con tarjetas visuales
                     SocialCardView(title: "Friends' Activity", icon: "person.2.fill") {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("🍽️ Sofía reviewed Ramen House")
-                            Text("🌮 Luis favorited Tacos El Güero")
-                            Text("🍕 Diego visited Pizza Urbana")
+                        VStack(spacing: 12) {
+                            ActivityCard(username: "Sofía", action: "reviewed", target: "Ramen House", icon: "pencil", color: .blue)
+                            ActivityCard(username: "Luis", action: "favorited", target: "Tacos El Güero", icon: "bookmark.fill", color: .orange)
+                            ActivityCard(username: "Diego", action: "visited", target: "Pizza Urbana", icon: "location.fill", color: .green)
                         }
-                        .font(.callout)
-                        .foregroundColor(.gray)
                     }
+
                 }
                 .padding(14)
             }
@@ -51,6 +69,71 @@ struct SocialGeneralView: View {
         .accentColor(.primaryGreen)
     }
 }
+
+struct ActivityCard: View {
+    var username: String
+    var action: String
+    var target: String
+    var icon: String
+    var color: Color
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: icon)
+                .font(.system(size: 20))
+                .foregroundColor(.white)
+                .padding(10)
+                .background(Circle().fill(color))
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text("\(username) \(action)")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+
+                Text(target)
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            }
+
+            Spacer()
+        }
+        .padding(10)
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: color.opacity(0.2), radius: 4, x: 0, y: 2)
+    }
+}
+
+
+struct AchievementBadge: View {
+    var title: String
+    var icon: String
+    var badgeColor: Color
+    var iconColor: Color
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.caption)
+                .foregroundColor(.white)
+                .padding(6)
+                .background(Circle().fill(iconColor))
+
+            Text(title)
+                .font(.caption)
+                .fontWeight(.semibold)
+                .foregroundColor(.white)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(badgeColor)
+        .cornerRadius(20)
+        .shadow(color: badgeColor.opacity(0.4), radius: 6, x: 0, y: 2)
+    }
+}
+
+
 
 #Preview {
     SocialGeneralView()
@@ -133,8 +216,8 @@ struct BarChartView: View {
 
 struct MiniMapView: View {
     @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 19.4326, longitude: -99.1332), // CDMX por defecto
-        span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+        center: CLLocationCoordinate2D(latitude: 19.0640, longitude: -98.3036), // Cholula
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
 
     var body: some View {
