@@ -9,14 +9,24 @@ struct HomeView: View {
         center: CLLocationCoordinate2D(latitude: 19.0413, longitude: -98.2062),
         span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     )
+    @State private var isShowingSearchResults = false
     var name: String = "Megan"
 
     var body: some View {
         NavigationView {
             ScrollView {
+                // Notification Navigation
                 NavigationLink(destination: NotificationView(), isActive: $isShowingNotification) { EmptyView() }
+                
+                // Hidden navigation link for search results
+                NavigationLink(
+                    destination: HealthyCravingSearchView(initialSearchText: searchText),
+                    isActive: $isShowingSearchResults
+                ) { EmptyView() }
+                
+                // Header
                 HStack {
-                    VStack(alignment: .leading){
+                    VStack(alignment: .leading) {
                         Text("  Hi \(name),")
                             .font(.largeTitle)
                             .fontWeight(.bold)
@@ -25,23 +35,30 @@ struct HomeView: View {
                     Spacer()
                 }
 
+                // Search Section
                 VStack(alignment: .leading, spacing: 10) {
-                    TextField("Vamos a comer...", text: $searchText)
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .cornerRadius(12)
-                        .overlay(
-                            HStack {
-                                Spacer()
-                                Image(systemName: "magnifyingglass")
-                                    .foregroundColor(.gray)
-                                    .padding(.trailing, 10)
-                            }
-                        )
+                    // Search field with return key handler
+                    TextField("Vamos a comer...", text: $searchText, onCommit: {
+                        if !searchText.isEmpty {
+                            isShowingSearchResults = true
+                        }
+                    })
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(12)
+                    .overlay(
+                        HStack {
+                            Spacer()
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                                .padding(.trailing, 10)
+                        }
+                    )
 
+                    // Categories
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
-                            ForEach(["Todas", "Hamburguesas", "Tacos", "Sushi", "Cafés"], id: \ .self) { category in
+                            ForEach(["Todas", "Hamburguesas", "Tacos", "Sushi", "Cafés"], id: \.self) { category in
                                 Button(action: {
                                     selectedCategory = category
                                 }) {
@@ -60,6 +77,7 @@ struct HomeView: View {
                 .padding(.horizontal)
                 .padding()
 
+                // Resto de tu contenido permanece igual...
                 WeeklyActivitySummaryView()
                 PopularNearbyView()
 
@@ -88,6 +106,8 @@ struct HomeView: View {
         .accentColor(Color.primaryGreen)
     }
 }
+
+// Resto de tus estructuras (PopularNearbyView, WeeklyActivitySummaryView, etc.) permanecen igual
 struct PopularNearbyView: View {
     struct Restaurant: Identifiable {
         let id = UUID()
