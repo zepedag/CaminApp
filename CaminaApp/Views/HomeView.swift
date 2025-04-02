@@ -1,6 +1,8 @@
 import SwiftUI
 import MapKit
 import CoreLocation
+import Firebase
+import FirebaseAuth
 
 // MARK: - Modelo para los restaurantes con coordenadas
 struct RestaurantLocation: Identifiable {
@@ -69,32 +71,38 @@ struct HomeView: View {
     @StateObject private var locationManager = LocationManager()
     @State private var isShowingNotification = false
     @State private var searchText = ""
-    @State private var selectedCategory = "Todas"
+    @State private var selectedCategory = "All"
     @State private var selectedRestaurant: RestaurantLocation? = nil
-    var name: String = "Megan"
-
+    @State private var showingDetailSheet = false
+    @State private var selectedRestaurantDetail: Restaurants? = nil
+    
+    @State private var userName: String = "Hi"
+    
     let nearbyRestaurants = [
-        RestaurantLocation(name: "Santoua", coordinate: CLLocationCoordinate2D(latitude: 19.0418, longitude: -98.2055), description: "Restaurante japonés contemporáneo con sushi y ramen."),
+        RestaurantLocation(name: "Santoua", coordinate: CLLocationCoordinate2D(latitude: 19.0418, longitude: -98.2055), description: "Contemporary Japanese restaurant with sushi and ramen."),
         RestaurantLocation(name: "Cus Cus Cus", coordinate: CLLocationCoordinate2D(latitude: 19.0420, longitude: -98.2070), description: "Comida árabe y mediterránea en un ambiente acogedor.")
     ]
-
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 NavigationLink(destination: NotificationView(), isActive: $isShowingNotification) { EmptyView() }
-
+                
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("  Hi \(name),")
+                        Text("Hi, \(userName)")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
                     }
                     Spacer()
                 }
+                .padding(.top, 15) // espacio desde la parte superior
+                .padding(.horizontal) // espacio lateral
 
+                
                 VStack(alignment: .leading, spacing: 10) {
-                    TextField("Vamos a comer...", text: $searchText)
+                    TextField("Let's eat...", text: $searchText)
                         .padding()
                         .background(Color(.systemGray6))
                         .cornerRadius(12)
@@ -106,10 +114,10 @@ struct HomeView: View {
                                     .padding(.trailing, 10)
                             }
                         )
-
+                    
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
-                            ForEach(["Todas", "Hamburguesas", "Tacos", "Sushi", "Cafés"], id: \.self) { category in
+                            ForEach(["All", "Hamburguers", "Tacos", "Sushi", "Coffee"], id: \.self) { category in
                                 Button(action: {
                                     selectedCategory = category
                                 }) {
@@ -124,26 +132,36 @@ struct HomeView: View {
                         }
                         .padding(.horizontal)
                     }
+                    .padding(.vertical, 10)
                 }
                 .padding(.horizontal)
-                .padding()
-
+                
                 WeeklyActivitySummaryView()
                 PopularNearbyView()
-
+                
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Explore nearby places")
                         .font(.headline)
                         .foregroundColor(.primaryGreen)
                         .padding(.top, 16)
                         .padding(.horizontal)
-
+                    
                     ZStack(alignment: .bottomTrailing) {
                         // Map with annotations
                         Map(coordinateRegion: $locationManager.region, annotationItems: nearbyRestaurants) { restaurant in
                             MapAnnotation(coordinate: restaurant.coordinate) {
                                 Button(action: {
-                                    selectedRestaurant = restaurant
+                                    // Simulación: conviertes el RestaurantLocation en un Restaurants real
+                                    selectedRestaurantDetail = Restaurants(
+                                        name: restaurant.name,
+                                        description: restaurant.description,
+                                        image: Image("restaurant2"),
+                                        location: restaurant.coordinate,
+                                        menu: [Dish(name: "Tacos al Pastor", calories: 450, price: 14.99)], // ejemplo
+                                        visitedBy: [],
+                                        reviews: []
+                                    )
+                                    showingDetailSheet = true
                                 }) {
                                     VStack {
                                         Image(systemName: "mappin.circle.fill")
@@ -154,11 +172,33 @@ struct HomeView: View {
                                             .foregroundColor(.black)
                                     }
                                 }
+                                .sheet(isPresented: $showingDetailSheet) {
+                                    if let detailRestaurant = selectedRestaurantDetail {
+                                        RestaurantDetailView(restaurant: detailRestaurant, userLocation: locationManager.region.center)
+                                    }
+                                }
+                                
                             }
                         }
                         .frame(height: 200)
                         .cornerRadius(12)
-
+                        
+                        
+                        /*
+                         Button(action: {
+                         self.showingTipsSheet = true
+                         }) {
+                         GardenTipsView(garden: garden)
+                         }
+                         .sheet(isPresented: $showingTipsSheet) {
+                         // Present your tips view here
+                         }
+                         NavigationLink(destination: GardenView(garden: garden), isActive: $showingPlantsSheet) {
+                         GardenPlantsView(garden: garden)
+                         }
+                         
+                         */
+                        
                         // Zoom buttons
                         VStack {
                             HStack {
@@ -173,9 +213,9 @@ struct HomeView: View {
                                         .padding()
                                         .background(Circle().foregroundColor(.black).opacity(0.5))
                                 }
-
+                                
                                 Spacer()
-
+                                
                                 // Button to zoom in
                                 Button(action: {
                                     let newSpan = MKCoordinateSpan(latitudeDelta: locationManager.region.span.latitudeDelta / 1.5, longitudeDelta: locationManager.region.span.longitudeDelta / 1.5)
@@ -195,12 +235,12 @@ struct HomeView: View {
                     .padding(.horizontal)
                 }
                 .padding(.bottom)
-
+                
                 // Restaurant detail sheet
                 .sheet(item: $selectedRestaurant) { restaurant in
                     RestaurantDetailSheet(restaurant: restaurant)
                 }
-
+                
                 .navigationTitle("Home")
                 .navigationBarItems(trailing: Button(action: {
                     isShowingNotification = true
@@ -210,6 +250,31 @@ struct HomeView: View {
             }
         }
         .accentColor(Color.primaryGreen)
+        .onAppear {
+            fetchUserNameFromDatabase()
+        }
+    }
+    private func fetchUserNameFromDatabase() {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("No hay usuario autenticado")
+            userName = "there"
+            return
+        }
+        
+        print("Buscando usuario con ID: \(userID)")
+        
+        let dbRef = Database.database().reference()
+        dbRef.child("users").child(userID).observeSingleEvent(of: .value) { snapshot in
+            print("Snapshot recibido: \(snapshot)")
+            
+            if let userData = snapshot.value as? [String: Any] {
+                print("Datos del usuario: \(userData)")
+                self.userName = userData["firstName"] as? String ?? "there"
+            } else {
+                print("No se encontraron datos para el usuario")
+                self.userName = "there"
+            }
+        }
     }
 }
 
