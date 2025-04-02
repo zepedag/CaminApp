@@ -5,50 +5,74 @@ struct RestaurantCardView: View {
     let restaurant: Restaurant
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .top) {
-                restaurantInfo
-                Spacer()
-                calorieCircle
+        ZStack(alignment: .bottomLeading) {
+            backgroundImage
+            overlayContent
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .shadow(radius: 4)
+    }
+    
+    private var backgroundImage: some View {
+        Image("antojitos-image") // Reemplaza con la imagen real
+            .resizable()
+            .scaledToFill()
+            .frame(height: 160)
+            .clipped()
+            .overlay(Color.brown.opacity(0.6))
+    }
+    
+    private var overlayContent: some View {
+        VStack(alignment: .leading, spacing: 0) {
+           
+            HStack {
+                Text(restaurant.name)
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .bold()
+                    .padding(.top, 5)
+                    .padding(.leading, 20)
+                    .background(Color.white.opacity(0.3))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
             }
             
-            nutritionInfo
+            HStack() {
+                VStack{
+                    Label(restaurant.foodType, systemImage: "fork.knife")
+                        .font(.subheadline)
+                        .foregroundColor(.white)
+                        .padding(6)
+                        .padding(.leading, 20)
+                        .background(Color.white.opacity(0.3))
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                }
+                Spacer()
+                VStack{
+                    calorieCircle
+                        .padding(.trailing, 20)
+                }
+               
+            }
+            HStack() {
+                Label("\(restaurant.walkingTime) min", systemImage: "clock")
+                    .font(.caption)
+                    .foregroundColor(.white)
+                    .padding(8)
+                    .padding(.leading, 20)
+                    .background(Color.white.opacity(0.3))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
+            
+            
         }
         .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
     }
-    
-    private var restaurantInfo: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(restaurant.name)
-                .font(.headline)
-            
-            Text(restaurant.foodType)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-            
-            HStack(spacing: 16) {
-                Label("\(restaurant.distance.formatted(.number.precision(.fractionLength(1)))) km", systemImage: "map")
-                Label("\(restaurant.walkingTime) min", systemImage: "clock")
-            }
-            .font(.caption)
-            .foregroundColor(.gray)
-        }
-    }
-    
+
     private var calorieCircle: some View {
         CalorieComparisonView(percentage: restaurant.caloriesPercentage)
-            .frame(width: 60, height: 60)
+            .frame(width: 80, height: 80)
     }
-    
-    private var nutritionInfo: some View {
-        HStack {
-            NutritionBadge(value: "\(restaurant.caloriesInFood) kcal", label: "Comida", color: .orange)
-            NutritionBadge(value: "\(restaurant.caloriesBurned) kcal", label: "Quemadas", color: .primaryGreen)
-            NutritionBadge(value: "\(Int((1 - restaurant.caloriesPercentage) * 100))%", label: "Neto", color: .purple)
-        }
-    }
+
 }
 
 struct RestaurantCardView_Previews: PreviewProvider {
@@ -67,5 +91,7 @@ struct RestaurantCardView_Previews: PreviewProvider {
     static var previews: some View {
         RestaurantCardView(restaurant: previewProvider)
             .previewLayout(.sizeThatFits)
+            .padding()
     }
 }
+
