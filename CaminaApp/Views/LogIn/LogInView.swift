@@ -1,58 +1,76 @@
-import Foundation
 import SwiftUI
 
 struct LogInView: View {
     @State private var username: String = ""
     @State private var password: String = ""
-    
+    @State private var isShowingSignUp = false
+    @State private var isShowingNavBar = false
+
     var body: some View {
-        VStack {
-            Spacer()
-            
-            Text("Welcome to Cultivise")
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundColor(Color.primaryGreen)
-                .padding()
-            
-            Image("huerto_logo")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 150, maxHeight: 150)
-                .padding()
-            
-            VStack(spacing: 20) {
-                TextField("Username", text: $username)
-                    .padding()
-                    .background(Color.cream)
-                    .cornerRadius(8.0)
-                
-                SecureField("Password", text: $password)
-                    .padding()
-                    .background(Color.cream)
-                    .cornerRadius(8.0)
+        NavigationStack {
+            VStack(spacing: 60) {
+                Text("Welcome to CaminaApp")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.primaryGreen)
+                    .padding(.top, 100)
+
+                VStack(spacing: 60) {
+                    TextField("Username", text: $username)
+                        .padding()
+                        .background(Color.cream)
+                        .cornerRadius(8.0)
+
+                    SecureField("Password", text: $password)
+                        .padding()
+                        .background(Color.cream)
+                        .cornerRadius(8.0)
+                }
+                .padding(.horizontal)
+
+                Button(action: {
+                    isShowingNavBar = true
+                }) {
+                    Text("Login")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.brown)
+                        .cornerRadius(8.0)
+                        .padding(.horizontal)
+                }
+                .padding(.vertical, 0)
+
+                Button(action: {
+                    isShowingSignUp = true
+                }) {
+                    Text("SignUp")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.primaryGreen)
+                        .cornerRadius(8.0)
+                        .padding(.horizontal)
+                }
+
+                Spacer()
             }
-            .padding(.horizontal)
-            
-            Button(action: {
-                // TODO: Add validation for sign up
-            }) {
-                Text("Login")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.primaryGreen)
-                    .cornerRadius(8.0)
-                    .padding(.horizontal)
+            .foregroundColor(Color.darkGreen)
+            .navigationDestination(isPresented: $isShowingNavBar) {
+                NavigationBar()
             }
-            
-            Spacer()
+            .navigationDestination(isPresented: $isShowingSignUp) {
+                SignUpView()
+            }
         }
-        .foregroundColor(Color.darkGreen)
+        .accentColor(Color.primaryGreen)
     }
 }
 
 #Preview {
     LogInView()
 }
+
+
