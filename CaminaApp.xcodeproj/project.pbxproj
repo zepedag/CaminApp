@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -105,6 +105,10 @@
 		E4189C8E2D9D136E005FA7C0 /* CaminaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminaUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E4189C912D9D1415005FA7C0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A5C90ED02D9D27F000E322EE /* Images */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Images; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		06D1819A2B92378A00352475 /* Frameworks */ = {
@@ -236,6 +240,7 @@
 		06D1819F2B92378A00352475 /* CaminaApp */ = {
 			isa = PBXGroup;
 			children = (
+				A5C90ED02D9D27F000E322EE /* Images */,
 				E4189C892D9D134E005FA7C0 /* CaminaApp.swift */,
 				0640D1482B9A31D8003726B1 /* VirtualReality */,
 				061572B62B924B90002F6ADD /* Resources */,
@@ -294,6 +299,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A5C90ED02D9D27F000E322EE /* Images */,
 			);
 			name = CaminaApp;
 			productName = Huertos;
