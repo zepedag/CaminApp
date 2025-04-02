@@ -1,5 +1,7 @@
 import SwiftUI
 import MapKit
+import Firebase
+import FirebaseAuth
 
 struct HomeView: View {
     @State private var isShowingNotification = false
@@ -10,8 +12,8 @@ struct HomeView: View {
         span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     )
     @State private var isShowingSearchResults = false
-    var name: String = "Megan"
-
+    @State private var userName: String = "Hi" // Valor inicial
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -27,7 +29,7 @@ struct HomeView: View {
                 // Header
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("  Hi \(name),")
+                        Text("Hi, \(userName)")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
@@ -77,7 +79,6 @@ struct HomeView: View {
                 .padding(.horizontal)
                 .padding()
 
-                // Resto de tu contenido permanece igual...
                 WeeklyActivitySummaryView()
                 PopularNearbyView()
 
@@ -104,10 +105,36 @@ struct HomeView: View {
             }
         }
         .accentColor(Color.primaryGreen)
+        .onAppear {
+            fetchUserNameFromDatabase()
+        }
+    }
+    
+    private func fetchUserNameFromDatabase() {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("No hay usuario autenticado")
+            userName = "there"
+            return
+        }
+        
+        print("Buscando usuario con ID: \(userID)")
+        
+        let dbRef = Database.database().reference()
+        dbRef.child("users").child(userID).observeSingleEvent(of: .value) { snapshot in
+            print("Snapshot recibido: \(snapshot)")
+            
+            if let userData = snapshot.value as? [String: Any] {
+                print("Datos del usuario: \(userData)")
+                self.userName = userData["firstName"] as? String ?? "there"
+            } else {
+                print("No se encontraron datos para el usuario")
+                self.userName = "there"
+            }
+        }
     }
 }
 
-// Resto de tus estructuras (PopularNearbyView, WeeklyActivitySummaryView, etc.) permanecen igual
+// Resto de tus estructuras (PopularNearbyView, WeeklyActivitySummaryView, etc.) permanecen exactamente igual
 struct PopularNearbyView: View {
     struct Restaurant: Identifiable {
         let id = UUID()
@@ -170,7 +197,6 @@ struct WeeklyActivitySummaryView: View {
             navigateToDetail = true
         }) {
             ZStack {
-                // Fondo difuminado bonito usando colores definidos
                 LinearGradient(
                     gradient: Gradient(colors: [Color.primaryGreen.opacity(0.8), Color.navyBlue.opacity(0.8)]),
                     startPoint: .topLeading,
@@ -207,7 +233,6 @@ struct WeeklyActivitySummaryView: View {
 
                     Spacer()
 
-                    // Mini círculo de progreso
                     ZStack {
                         Circle()
                             .stroke(lineWidth: 8)
@@ -240,14 +265,6 @@ struct WeeklyActivitySummaryView: View {
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.1), radius: 16, x: 0, y: 0)
         .frame(width: 351, height: 165, alignment: .leading)
-    }
-}
-
-struct WeeklyActivityDetailView: View {
-    var body: some View {
-        Text("Detalle de la actividad semanal")
-            .font(.title)
-            .padding()
     }
 }
 
