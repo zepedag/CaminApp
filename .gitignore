@@ -1,0 +1,6 @@
+# macOS system files
+.DS_Store
+
+# Xcode UI state
+*.xcuserstate
+*.xcworkspace/xcuserdata/
