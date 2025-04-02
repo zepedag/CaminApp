@@ -99,6 +99,7 @@
 		AB200DD62B98EC7D002DE93A /* GeneralGardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralGardenView.swift; sourceTree = "<group>"; };
 		AB200DD82B992873002DE93A /* PlantCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCardView.swift; sourceTree = "<group>"; };
 		AB200DDA2B9B731B002DE93A /* PlantStagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantStagesView.swift; sourceTree = "<group>"; };
+		ABEC82B02D9D30F70051495B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E4189C892D9D134E005FA7C0 /* CaminaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminaApp.swift; sourceTree = "<group>"; };
 		E4189C8B2D9D1360005FA7C0 /* CaminaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminaTests.swift; sourceTree = "<group>"; };
 		E4189C8D2D9D136E005FA7C0 /* CaminaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaminaUITests.swift; sourceTree = "<group>"; };
@@ -220,6 +221,7 @@
 		06D181942B92378A00352475 = {
 			isa = PBXGroup;
 			children = (
+				ABEC82B02D9D30F70051495B /* .gitignore */,
 				06D1819F2B92378A00352475 /* CaminaApp */,
 				06D181B02B92378B00352475 /* CaminaTests */,
 				06D181BA2B92378B00352475 /* CaminaUITests */,
