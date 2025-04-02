@@ -7,6 +7,7 @@ struct SettingsView: View {
     @State private var isDarkMode: Bool = false
     @State private var letterSize: Double = 14
     @State private var language: String = "EN"
+    @State private var city: String = ""
 
     var body: some View {
             Form {
@@ -19,14 +20,20 @@ struct SettingsView: View {
                     }
                     TextField("Full Name", text: $fullName)
                     TextField("Joined on", text: $joinedDate)
+                    TextField("City", text: $city)
                 }
                 
                 Section(header: Text("PRIVACY AND SECURITY")) {
                     Button(action: {
-                        // Acción para cambiar la contraseña
+                    }) {
+                        Text("Save")
+                            .foregroundColor(Color.primaryGreen)
+                    }
+                    Button(action: {
                     }) {
                         HStack {
                             Text("Change password")
+                                .foregroundColor(Color.primaryGreen)
                             Spacer()
                             Text("Last changed: 3 weeks ago")
                                 .foregroundColor(.secondary)
@@ -34,18 +41,21 @@ struct SettingsView: View {
                     }
                     
                     Button(action: {
-                        // Acción para cerrar sesión
                     }) {
                         Text("Log out")
+                            .foregroundColor(Color.primaryGreen)
                     }
+                    
                 }
             }
             .navigationBarTitle("Settings")
+            .accentColor(Color.primaryGreen)
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .navigationBarBackButtonHidden(false)
     }
 }

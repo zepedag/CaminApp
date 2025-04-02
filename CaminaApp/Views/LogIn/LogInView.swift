@@ -8,14 +8,14 @@ struct LogInView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 60) {
+            VStack(spacing: 80) {
                 Text("Welcome to CaminaApp")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.primaryGreen)
                     .padding(.top, 100)
 
-                VStack(spacing: 60) {
+                VStack(spacing: 30) {
                     TextField("Username", text: $username)
                         .padding()
                         .background(Color.cream)
@@ -26,8 +26,10 @@ struct LogInView: View {
                         .background(Color.cream)
                         .cornerRadius(8.0)
                 }
-                .padding(.horizontal)
-
+                .padding(.horizontal, 35)
+                .padding(.bottom, 60)
+            }
+            VStack (spacing: 20){
                 Button(action: {
                     isShowingNavBar = true
                 }) {
@@ -37,7 +39,7 @@ struct LogInView: View {
                         .padding()
                         .frame(maxWidth: .infinity)
                         .background(Color.brown)
-                        .cornerRadius(8.0)
+                        .cornerRadius(20.0)
                         .padding(.horizontal)
                 }
                 .padding(.vertical, 0)
@@ -50,13 +52,26 @@ struct LogInView: View {
                         .font(.headline)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.primaryGreen)
-                        .cornerRadius(8.0)
+                        .background(Color.navyBlue)
+                        .cornerRadius(20.0)
                         .padding(.horizontal)
                 }
-
-                Spacer()
+                Button(action: {
+                    
+                }) {
+                    Text("Authenticate With Biometrics")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.primaryGreen)
+                        .cornerRadius(20.0)
+                        .padding(.horizontal)
+                }
+                .padding(.bottom, 70)
             }
+            
+
             .foregroundColor(Color.darkGreen)
             .navigationDestination(isPresented: $isShowingNavBar) {
                 NavigationBar()
