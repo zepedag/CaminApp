@@ -8,6 +8,9 @@ struct HealthyCravingSearchView: View {
     @State private var isLoading = false
     @State private var showError = false
     @State private var errorMessage = ""
+    @State private var routeType = "Normal"
+    @State private var startPoint = ""
+    @State private var endPoint = ""
     
     init(initialSearchText: String = "") {
         self._searchText = State(initialValue: initialSearchText)
@@ -46,7 +49,6 @@ struct HealthyCravingSearchView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Carrusel con padding superior
             if !searchResults.isEmpty {
                 FitnessFactsCarousel(facts: FitnessFactsCarousel.defaultFacts)
                     .padding(.top, 10)
@@ -54,13 +56,79 @@ struct HealthyCravingSearchView: View {
 
             SearchBar(text: $searchText, placeholder: "Busca tu antojito...", onCommit: performSearch)
                 .padding(.horizontal)
+                .padding(.bottom, 10)
                 .padding(.top)
                 .onChange(of: searchText) { newValue in
                     if newValue.isEmpty {
                         searchResults = []
                     }
                 }
+            
+            Picker("Route Type", selection: $routeType) {
+                Text("Normal").tag("Normal")
+                Text("Custom").tag("Custom")
+            }
 
+            .pickerStyle(SegmentedPickerStyle())
+            .padding(.horizontal)
+
+            if routeType == "Custom" {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Set Your Route")
+                        .font(.headline)
+                        .padding(.bottom, 5)
+                        .padding(.top, 10)
+
+                    HStack {
+                        Image(systemName: "location.circle.fill")
+                            .foregroundColor(.blue)
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color.white)
+                                .frame(height: 40) // Altura personalizada
+                                .shadow(radius: 2)
+                            
+                            TextField("Starting point", text: $startPoint)
+                                .padding(.horizontal, 10)
+                        }
+                    }
+
+                    HStack {
+                        Image(systemName: "mappin.and.ellipse")
+                            .foregroundColor(.red)
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color.white)
+                                .frame(height: 40) // Altura personalizada
+                                .shadow(radius: 2)
+                            
+                            TextField("Destination", text: $endPoint)
+                                .padding(.horizontal, 10)
+                        }
+                    }
+
+
+
+
+                    Button(action: updateMockRouteData) {
+                        HStack {
+                            Image(systemName: "arrow.right.circle.fill")
+                            Text("Save Route")
+                                .fontWeight(.bold)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.primaryGreen)
+                    .padding(.top, 5)
+                }
+                .padding(.horizontal)
+            }
+
+
+            
             if isLoading {
                 ProgressView()
                     .padding()
@@ -88,14 +156,13 @@ struct HealthyCravingSearchView: View {
             }
         }
     }
-
+    
     private var resultsList: some View {
         List(searchResults) { restaurant in
             HStack {
-                Spacer()  // Hace que la tarjeta sea más estrecha
+                Spacer()
                 RestaurantCardView(restaurant: restaurant)
-                    .frame(maxWidth: 350) // Ancho máximo para que no ocupe toda la pantalla
-                
+                    .frame(maxWidth: 350)
                 Spacer()
             }
             .listRowSeparator(.hidden)
@@ -104,7 +171,7 @@ struct HealthyCravingSearchView: View {
         }
         .listStyle(.plain)
     }
-
+    
     private var emptyStateView: some View {
         VStack {
             Image(systemName: "magnifyingglass")
@@ -147,44 +214,52 @@ struct HealthyCravingSearchView: View {
             }
         }
     }
-}
-
-// MARK: - Search Bar (Reusable Component)
-struct SearchBar: View {
-    @Binding var text: String
-    var placeholder: String
-    var onCommit: () -> Void
     
-    var body: some View {
-        HStack {
-            TextField(placeholder, text: $text, onCommit: onCommit)
-                .padding(8)
-                .padding(.horizontal, 24)
-                .background(Color(.systemGray5))
-                .cornerRadius(8)
-                .overlay(
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 8)
-                        
-                        if !text.isEmpty {
-                            Button(action: {
-                                text = ""
-                            }) {
-                                Image(systemName: "multiply.circle.fill")
-                                    .foregroundColor(.gray)
-                                    .padding(.trailing, 8)
+    private func updateMockRouteData() {
+        searchResults = searchResults.map { restaurant in
+            var updatedRestaurant = restaurant
+            updatedRestaurant.distance += 0.5
+            updatedRestaurant.walkingTime += 5
+            return updatedRestaurant
+        }
+    }
+
+    // MARK: - Search Bar (Reusable Component)
+    struct SearchBar: View {
+        @Binding var text: String
+        var placeholder: String
+        var onCommit: () -> Void
+        
+        var body: some View {
+            HStack {
+                TextField(placeholder, text: $text, onCommit: onCommit)
+                    .padding(8)
+                    .padding(.horizontal, 24)
+                    .background(Color(.systemGray5))
+                    .cornerRadius(8)
+                    .overlay(
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading, 8)
+                            
+                            if !text.isEmpty {
+                                Button(action: {
+                                    text = ""
+                                }) {
+                                    Image(systemName: "multiply.circle.fill")
+                                        .foregroundColor(.gray)
+                                        .padding(.trailing, 8)
+                                }
                             }
                         }
-                    }
-                )
+                    )
+            }
         }
     }
 }
 
-// MARK: - Preview
 struct HealthyCravingSearchView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
@@ -192,3 +267,4 @@ struct HealthyCravingSearchView_Previews: PreviewProvider {
         }
     }
 }
+
