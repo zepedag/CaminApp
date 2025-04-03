@@ -714,7 +714,7 @@
 				DEVELOPMENT_TEAM = 24YJWTXPPD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Verdant;
+				INFOPLIST_KEY_CFBundleDisplayName = CaminApp;
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"Camera is needed for AR experience\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -745,7 +745,7 @@
 				DEVELOPMENT_TEAM = 24YJWTXPPD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Verdant;
+				INFOPLIST_KEY_CFBundleDisplayName = CaminApp;
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"Camera is needed for AR experience\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
