@@ -31,10 +31,6 @@ struct MapMultiplePointsView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Location")
-                .font(.title2.bold())
-                .foregroundColor(.primaryGreen)
-
             ZStack(alignment: .topTrailing) {
                 Map(coordinateRegion: $region, annotationItems: restaurants) { restaurant in
                     MapAnnotation(coordinate: restaurant.location) {

@@ -74,10 +74,18 @@ struct RestaurantDetailView: View {
                     }
                 }
                 .padding(.horizontal)
+                
+                VStack(alignment: .leading, spacing: 10){
+                    Text("Location")
+                        .font(.title2.bold())
+                        .foregroundColor(.primaryGreen)
+                        .padding(.leading, 18)
 
-                // Aquí usamos el nuevo componente MapMultiplePointsView
-                MapMultiplePointsView(restaurants: [restaurant], userLocation: userLocation)
+                    // Aquí usamos el nuevo componente MapMultiplePointsView
+                    MapMultiplePointsView(restaurants: [restaurant], userLocation: userLocation)
 
+                }
+                
                 // Información de distancia y calorías
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Distance: \(String(format: "%.2f", distanceInKm)) km")
