@@ -18,36 +18,6 @@
             endingLineNumber = "14"
             landmarkName = "Color"
             landmarkType = "21">
-            <Locations>
-               <Location
-                  uuid = "74024D4F-B649-4D5C-91A1-36BE463226F1 - 66f26304a290402a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "one-time initialization function for lightGreen"
-                  moduleName = "CaminaApp.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Emi/Desktop/SabroPaso/caminApp/CaminaApp/Resources/Colors.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14">
-               </Location>
-               <Location
-                  uuid = "74024D4F-B649-4D5C-91A1-36BE463226F1 - f29e73c326c9e680"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SwiftUI.Color.lightGreen.unsafeMutableAddressor : SwiftUI.Color"
-                  moduleName = "CaminaApp.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Emi/Desktop/SabroPaso/caminApp/CaminaApp/Resources/Colors.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
