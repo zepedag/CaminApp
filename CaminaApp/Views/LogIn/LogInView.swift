@@ -12,69 +12,76 @@ struct LogInView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 80) {
-                Text("Welcome to CaminaApp")
+            VStack(spacing: 30) {
+                Text("Welcome to Antojo Activo")
                     .font(.title)
                     .fontWeight(.bold)
-                    .foregroundColor(Color.primaryGreen)
-                    .padding(.top, 100)
-
-                VStack(spacing: 30) {
+                    .foregroundColor(Color.darkGreen)
+                    .padding(.top, 10)
+                Image("logoAntojoActivo")
+                    .resizable()
+                    .frame(height: 200)
+                    .frame(width: 200)
+                    .cornerRadius(12)
+                
+                // Campos de entrada
+                VStack(spacing: 20) {
                     TextField("Email", text: $email)
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
                         .textInputAutocapitalization(.never)
                         .padding()
                         .background(Color.cream)
-                        .cornerRadius(8.0)
+                        .cornerRadius(8)
 
                     SecureField("Password", text: $password)
                         .padding()
                         .background(Color.cream)
-                        .cornerRadius(8.0)
+                        .cornerRadius(8)
                 }
-                .padding(.horizontal, 35)
-                .padding(.bottom, 60)
-            }
-            VStack (spacing: 20){
-                Button(action: loginUser) {
-                    Text("Login")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.brown)
-                        .cornerRadius(20.0)
-                        .padding(.horizontal)
-                }
-                .padding(.vertical, 0)
+                .padding(.horizontal, 30)
 
-                Button(action: {
-                    isShowingSignUp = true
-                }) {
-                    Text("SignUp")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.navyBlue)
-                        .cornerRadius(20.0)
-                        .padding(.horizontal)
+                // Botones
+                VStack(spacing: 15) {
+                    Button(action: loginUser) {
+                        Text("Login")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.brown)
+                            .cornerRadius(12)
+                    }
+
+                    Button(action: {
+                        isShowingSignUp = true
+                    }) {
+                        Text("Sign Up")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.navyBlue)
+                            .cornerRadius(12)
+                    }
+
+                    Button(action: {
+                        // Acción para autenticación biométrica
+                    }) {
+                        Text("Authenticate With Biometrics")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.primaryGreen)
+                            .cornerRadius(12)
+                    }
                 }
-                Button(action: {
-                }) {
-                    Text("Authenticate With Biometrics")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.primaryGreen)
-                        .cornerRadius(20.0)
-                        .padding(.horizontal)
-                }
-                .padding(.bottom, 70)
+                .padding(.horizontal, 30)
             }
-            .foregroundColor(Color.darkGreen)
+            .padding(.bottom, 10) // Espacio inferior
+
+            // Navegación
             .navigationDestination(isPresented: $isShowingNavBar) {
                 NavigationBar()
             }
@@ -97,7 +104,6 @@ struct LogInView: View {
                 showAlert = true
                 return
             }
-
             isShowingNavBar = true
         }
     }
