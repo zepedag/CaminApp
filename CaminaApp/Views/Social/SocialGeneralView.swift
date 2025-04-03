@@ -2,6 +2,15 @@ import SwiftUI
 import MapKit
 
 struct SocialGeneralView: View {
+    let visitedPlaces = [
+        Restaurants(name: "Ramen House", description: "Popular Asian ramen spot.", image: Image("restaurant1"), location: CLLocationCoordinate2D(latitude: 19.0640, longitude: -98.3036), menu: [], visitedBy: [], reviews: []),
+        Restaurants(name: "Tacos El Güero", description: "Street-style tacos.", image: Image("restaurant2"), location: CLLocationCoordinate2D(latitude: 19.0632, longitude: -98.3051), menu: [], visitedBy: [], reviews: []),
+        Restaurants(name: "Pizza Urbana", description: "Wood-fired pizzas and craft beers.", image: Image("restaurant3"), location: CLLocationCoordinate2D(latitude: 19.0620, longitude: -98.3024), menu: [], visitedBy: [], reviews: []),
+        Restaurants(name: "Green Garden", description: "Vegetarian and vegan dishes.", image: Image("restaurant4"), location: CLLocationCoordinate2D(latitude: 19.0610, longitude: -98.3045), menu: [], visitedBy: [], reviews: []),
+        Restaurants(name: "Sushi Kai", description: "Modern sushi fusion.", image: Image("restaurant5"), location: CLLocationCoordinate2D(latitude: 19.0605, longitude: -98.3060), menu: [], visitedBy: [], reviews: [])
+    ]
+
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -26,10 +35,14 @@ struct SocialGeneralView: View {
 
                     // Mapa de visitas
                     SocialCardView(title: "Map of Visited Places", icon: "map.fill") {
-                        MiniMapView()
-                            .frame(height: 200)
-                            .cornerRadius(12)
+                        MapMultiplePointsView(
+                            restaurants: visitedPlaces,
+                            userLocation: CLLocationCoordinate2D(latitude: 19.0625, longitude: -98.3040)
+                        )
+                        .frame(height: 200)
+                        .cornerRadius(12)
                     }
+
 
                     SocialCardView(title: "Achievements", icon: "rosette") {
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -209,17 +222,6 @@ struct BarChartView: View {
             }
         }
         .padding(.top, 8)
-    }
-}
-
-struct MiniMapView: View {
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 19.0640, longitude: -98.3036), // Cholula
-        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-    )
-
-    var body: some View {
-        Map(coordinateRegion: $region)
     }
 }
 

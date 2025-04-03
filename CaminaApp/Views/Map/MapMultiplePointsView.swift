@@ -18,8 +18,8 @@ struct MapMultiplePointsView: View {
         let minLon = coordinates.min(by: { $0.longitude < $1.longitude })?.longitude ?? -98.2070
         let maxLon = coordinates.max(by: { $0.longitude < $1.longitude })?.longitude ?? -98.2055
 
-        let spanLatitudeDelta = maxLat - minLat + 0.01
-        let spanLongitudeDelta = maxLon - minLon + 0.01
+        let spanLatitudeDelta = maxLat - minLat + 0.005
+        let spanLongitudeDelta = maxLon - minLon + 0.005
 
         _region = State(initialValue: MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2,
