@@ -186,22 +186,7 @@ struct HomeView: View {
                         }
                         .frame(height: 200)
                         .cornerRadius(12)
-                        
-                        
-                        /*
-                         Button(action: {
-                         self.showingTipsSheet = true
-                         }) {
-                         GardenTipsView(garden: garden)
-                         }
-                         .sheet(isPresented: $showingTipsSheet) {
-                         // Present your tips view here
-                         }
-                         NavigationLink(destination: GardenView(garden: garden), isActive: $showingPlantsSheet) {
-                         GardenPlantsView(garden: garden)
-                         }
-                         
-                         */
+                    
                         
                         // Zoom buttons
                         VStack {

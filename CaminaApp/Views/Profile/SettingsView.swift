@@ -19,7 +19,6 @@ struct SettingsView: View {
                         TextField("Username", text: $username)
                     }
                     TextField("Full Name", text: $fullName)
-                    TextField("Joined on", text: $joinedDate)
                     TextField("City", text: $city)
                 }
                 

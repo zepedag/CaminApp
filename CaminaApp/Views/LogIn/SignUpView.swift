@@ -6,6 +6,9 @@ struct UserData {
     var firstName: String = ""
     var email: String = ""
     var password: String = ""
+    var age: Int = 0
+    var height: Double = 0
+    var weight: Double = 0
 }
 
 struct SignUpView: View {
@@ -61,7 +64,7 @@ struct SignUpView: View {
             }
         }
         .navigationDestination(isPresented: $isShowingUserInfo) {
-            UserInformationView(user: user)
+            UserInformationView()
         }
         .accentColor(Color.primaryGreen)
     }

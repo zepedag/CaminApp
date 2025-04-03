@@ -21,7 +21,7 @@ struct NavigationBar: View {
                 }
                 .tag(1)
             
-            ProfileView(user: users.first!)
+            ProfileView()
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Profile")
