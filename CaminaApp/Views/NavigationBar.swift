@@ -1,4 +1,5 @@
 import SwiftUI
+import MapKit
 
 struct NavigationBar: View {
     @State private var selectedTab = 1
@@ -14,7 +15,20 @@ struct NavigationBar: View {
                 }
                 .tag(0)
             
-            HomeView()
+            let sampleRestaurants = [
+                Restaurants(
+                    name: "Casa Cholula",
+                    description: "Traditional Mexican food with a modern twist.",
+                    image: Image(systemName: "photo"),
+                    location: CLLocationCoordinate2D(latitude: 19.0640, longitude: -98.3036),
+                    menu: [Dish(name: "Tacos al Pastor", calories: 450, price: 49.99)],
+                    visitedBy: [],
+                    reviews: []
+                )
+            ]
+            let userLocation = CLLocationCoordinate2D(latitude: 19.0625, longitude: -98.3040)
+            
+            HomeView(restaurants: sampleRestaurants, userLocation: userLocation)
                 .tabItem {
                     Image(systemName: "house.fill")
                     Text("Home")
