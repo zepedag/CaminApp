@@ -75,23 +75,8 @@ struct RestaurantDetailView: View {
                 }
                 .padding(.horizontal)
 
-                // Mapa
-                VStack(alignment: .leading) {
-                    Text("Location")
-                        .font(.title2.bold())
-                        .foregroundColor(.primaryGreen)
-
-                    Map(coordinateRegion: .constant(
-                        MKCoordinateRegion(
-                            center: restaurant.location,
-                            span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-                    ), annotationItems: [restaurant]) { place in
-                        MapMarker(coordinate: place.location, tint: .primaryGreen)
-                    }
-                    .frame(height: 200)
-                    .cornerRadius(12)
-                }
-                .padding(.horizontal)
+                // Aquí usamos el nuevo componente MapMultiplePointsView
+                MapMultiplePointsView(restaurants: [restaurant], userLocation: userLocation)
 
                 // Información de distancia y calorías
                 VStack(alignment: .leading, spacing: 6) {
@@ -218,7 +203,6 @@ struct Review: Identifiable {
             Review(username: "Luis", rating: 4, comment: "Loved the mole.")
         ]
     )
-
     let sampleUserLocation = CLLocationCoordinate2D(latitude: 19.0580, longitude: -98.2970)
 
     return RestaurantDetailView(restaurant: sampleRestaurant, userLocation: sampleUserLocation)
