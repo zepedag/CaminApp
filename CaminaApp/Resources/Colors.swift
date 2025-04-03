@@ -13,6 +13,7 @@ extension Color {
     public static let opaqueRed = Color(hex: "#E06A6A")
     public static let lightGreen = Color(hex: "#B0C4B0")
     public static let deepBlue = Color(hex: "#7FA5AA")
+    public static let darkorange = Color(hex: "#FF6600")
 }
 
 extension Color {

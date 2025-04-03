@@ -85,4 +85,3 @@ struct RestaurantMenuView: View {
 
     return RestaurantMenuView(menu: sampleMenu)
 }
-

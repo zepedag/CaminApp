@@ -147,21 +147,79 @@ struct HomeView: View {
                         .foregroundColor(.primaryGreen)
                         .padding(.top, 16)
                         .padding(.horizontal)
-
-                    MapMultiplePointsView(
-                        restaurants: nearbyRestaurants.map {
-                            Restaurants(
-                                name: $0.name,
-                                description: $0.description,
-                                image: Image("restaurant1"),
-                                location: $0.coordinate,
-                                menu: [],
-                                visitedBy: [],
-                                reviews: []
-                            )
-                        },
-                        userLocation: locationManager.region.center
-                    )
+ 
+                    ZStack(alignment: .bottomTrailing) {
+                        // Map with annotations
+                        Map(coordinateRegion: $locationManager.region, annotationItems: nearbyRestaurants) { restaurant in
+                            MapAnnotation(coordinate: restaurant.coordinate) {
+                                Button(action: {
+                                    // Simulación: conviertes el RestaurantLocation en un Restaurants real
+                                    selectedRestaurantDetail = Restaurants(
+                                        name: restaurant.name,
+                                        description: restaurant.description,
+                                        image: Image("restaurant2"),
+                                        location: restaurant.coordinate,
+                                        menu: [Dish(name: "Tacos al Pastor", calories: 450, price: 14.99)], // ejemplo
+                                        visitedBy: [],
+                                        reviews: []
+                                    )
+                                    showingDetailSheet = true
+                                }) {
+                                    VStack {
+                                        Image(systemName: "mappin.circle.fill")
+                                            .foregroundColor(.red)
+                                            .font(.title)
+                                        Text(restaurant.name)
+                                            .font(.caption)
+                                            .foregroundColor(.black)
+                                    }
+                                }
+                                .sheet(isPresented: $showingDetailSheet) {
+                                    if let detailRestaurant = selectedRestaurantDetail {
+                                        RestaurantDetailView(restaurant: detailRestaurant, userLocation: locationManager.region.center)
+                                    }
+                                }
+                                
+                            }
+                        }
+                        .frame(height: 200)
+                        .cornerRadius(12)
+                    
+                        
+                        // Zoom buttons
+                        VStack {
+                            HStack {
+                                // Button to zoom out
+                                Button(action: {
+                                    let newSpan = MKCoordinateSpan(latitudeDelta: locationManager.region.span.latitudeDelta * 1.5, longitudeDelta: locationManager.region.span.longitudeDelta * 1.5)
+                                    locationManager.region.span = newSpan
+                                }) {
+                                    Image(systemName: "minus.circle.fill")
+                                        .font(.title)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Circle().foregroundColor(.black).opacity(0.5))
+                                }
+                                
+                                Spacer()
+                                
+                                // Button to zoom in
+                                Button(action: {
+                                    let newSpan = MKCoordinateSpan(latitudeDelta: locationManager.region.span.latitudeDelta / 1.5, longitudeDelta: locationManager.region.span.longitudeDelta / 1.5)
+                                    locationManager.region.span = newSpan
+                                }) {
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.title)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Circle().foregroundColor(.black).opacity(0.5))
+                                }
+                            }
+                            .padding()
+                            Spacer()
+                        }
+                    }
+                    .padding(.horizontal)
                 }
                 .padding(.bottom)
 

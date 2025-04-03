@@ -79,6 +79,7 @@
 		E4189CD32D9DA3DF005FA7C0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E4189CD22D9DA3DF005FA7C0 /* FirebaseStorage */; };
 		E4189CD52D9DA3DF005FA7C0 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E4189CD42D9DA3DF005FA7C0 /* FirebaseStorageCombine-Community */; };
 		E4189CD72D9DA3DF005FA7C0 /* FirebaseVertexAI in Frameworks */ = {isa = PBXBuildFile; productRef = E4189CD62D9DA3DF005FA7C0 /* FirebaseVertexAI */; };
+		E4189D432D9E1F35005FA7C0 /* VisitedRestaurantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4189D422D9E1F29005FA7C0 /* VisitedRestaurantsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		E4189C912D9D1415005FA7C0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		E4189C952D9D4B87005FA7C0 /*  UserInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " UserInformationView.swift"; sourceTree = "<group>"; };
 		E4189C992D9D8DA9005FA7C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E4189D422D9E1F29005FA7C0 /* VisitedRestaurantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedRestaurantsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -356,6 +358,7 @@
 		AB1D139B2B9582570025EFFA /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				E4189D422D9E1F29005FA7C0 /* VisitedRestaurantsView.swift */,
 				E4189C912D9D1415005FA7C0 /* ProfileView.swift */,
 				AB1D139C2B9582690025EFFA /* SettingsView.swift */,
 			);
@@ -531,6 +534,7 @@
 				AB200DDB2B9B731B002DE93A /* PlantStagesView.swift in Sources */,
 				061572B82B924BB2002F6ADD /* Colors.swift in Sources */,
 				061572B22B92451D002F6ADD /* SignUpView.swift in Sources */,
+				E4189D432D9E1F35005FA7C0 /* VisitedRestaurantsView.swift in Sources */,
 				AB1D13922B93B6620025EFFA /* General.swift in Sources */,
 				061572AE2B9244EB002F6ADD /* LaunchView.swift in Sources */,
 				AB1D138A2B9384740025EFFA /* GardenCardView.swift in Sources */,
@@ -713,7 +717,7 @@
 				DEVELOPMENT_TEAM = 24YJWTXPPD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Verdant;
+				INFOPLIST_KEY_CFBundleDisplayName = CaminApp;
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"Camera is needed for AR experience\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -744,7 +748,7 @@
 				DEVELOPMENT_TEAM = 24YJWTXPPD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Verdant;
+				INFOPLIST_KEY_CFBundleDisplayName = CaminApp;
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"Camera is needed for AR experience\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

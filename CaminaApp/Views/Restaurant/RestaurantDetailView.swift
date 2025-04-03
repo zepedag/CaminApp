@@ -2,9 +2,10 @@ import SwiftUI
 import MapKit
 
 struct RestaurantDetailView: View {
+    @State private var selectedLocation = "Walk"
     let restaurant: Restaurants
     let userLocation: CLLocationCoordinate2D
-
+    let locations = ["Walk", "Bike"]
     var distanceInKm: Double {
         let userLoc = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
         let restLoc = CLLocation(latitude: restaurant.location.latitude, longitude: restaurant.location.longitude)
@@ -74,8 +75,49 @@ struct RestaurantDetailView: View {
                     }
                 }
                 .padding(.horizontal)
-                
-                VStack(alignment: .leading, spacing: 10){
+
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("How to go?")
+                        .font(.title2.bold())
+                        .foregroundColor(.primaryGreen)
+                    
+                        Picker("Choose a Spot", selection: $selectedLocation) {
+                            Text("🚶‍♂️ Walk").tag("Walk")
+                            Text("🚴‍♀️ Bike").tag("Bike")
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                        .padding(.vertical, 16)
+                        .padding(.horizontal, 8)
+                        .frame(height: 50)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(color: .primaryGreen.opacity(0.1), radius: 4, x: 0, y: 2)
+                    
+                        
+                        // Botón centrado y con ancho controlado
+                        Button(action: {
+                            // Navegación a la pantalla de ruta
+                        }) {
+                            HStack {
+                                Image(systemName: "location.circle.fill")
+                                    .foregroundColor(.white)
+                                Text("Start")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 40)
+                            .background(Color.primaryGreen)
+                            .cornerRadius(10)
+                            .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
+                        }
+                        .frame(maxWidth: .infinity)  // Centra el botón en su contenedor
+                }
+                .padding(.horizontal)
+
+
+                // Mapa
+                VStack(alignment: .leading) {
                     Text("Location")
                         .font(.title2.bold())
                         .foregroundColor(.primaryGreen)
