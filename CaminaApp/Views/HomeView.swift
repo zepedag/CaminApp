@@ -85,9 +85,50 @@ struct HomeView: View {
     @State private var userName: String = "Hi"
 
     let nearbyRestaurants = [
-        RestaurantLocation(name: "Santoua", coordinate: CLLocationCoordinate2D(latitude: 19.0418, longitude: -98.2055), description: "Contemporary Japanese restaurant with sushi and ramen."),
-        RestaurantLocation(name: "Cus Cus Cus", coordinate: CLLocationCoordinate2D(latitude: 19.0420, longitude: -98.2070), description: "Comida árabe y mediterránea en un ambiente acogedor.")
+        RestaurantLocation(
+            name: "Santoua",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0418, longitude: -98.2055),
+            description: "Contemporary Japanese restaurant with sushi and ramen."
+        ),
+        RestaurantLocation(
+            name: "Cus Cus Cus",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0420, longitude: -98.2070),
+            description: "Comida árabe y mediterránea en un ambiente acogedor."
+        ),
+        RestaurantLocation(
+            name: "La Textilería",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0412, longitude: -98.2093),
+            description: "Espacio moderno con cocina de autor y brunch de fin de semana."
+        ),
+        RestaurantLocation(
+            name: "Central de Agaves",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0426, longitude: -98.2060),
+            description: "Restaurante mexicano con cocteles artesanales y platillos tradicionales."
+        ),
+        RestaurantLocation(
+            name: "Sushi Seven",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0431, longitude: -98.2048),
+            description: "Fusión japonesa con opciones de sushi, ramen y teppanyaki."
+        ),
+        RestaurantLocation(
+            name: "Café & Tocino",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0424, longitude: -98.2087),
+            description: "Desayunos todo el día, café artesanal y pan recién horneado."
+        ),
+        RestaurantLocation(
+            name: "La Casa del Chef",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0435, longitude: -98.2059),
+            description: "Cocina internacional con enfoque en ingredientes locales."
+        ),
+        RestaurantLocation(
+            name: "Tacos Don Pancho",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0416, longitude: -98.2068),
+            description: "Tacos tradicionales al pastor y aguas frescas caseras."
+        )
     ]
+
+
+
     
     init(restaurants: [Restaurants], userLocation: CLLocationCoordinate2D) {
         self.restaurants = restaurants
@@ -220,13 +261,13 @@ struct HomeView: View {
                     
                         VStack(spacing: 12) {
                             MapControlButton2(icon: "plus") {
-                                region.span.latitudeDelta /= 1.5
-                                region.span.longitudeDelta /= 1.5
+                                locationManager.region.span.latitudeDelta /= 1.5
+                                locationManager.region.span.longitudeDelta /= 1.5
                             }
 
                             MapControlButton2(icon: "minus") {
-                                region.span.latitudeDelta *= 1.5
-                                region.span.longitudeDelta *= 1.5
+                                locationManager.region.span.latitudeDelta *= 1.5
+                                locationManager.region.span.longitudeDelta *= 1.5
                             }
 
                             MapControlButton2(icon: "arrow.up.left.and.arrow.down.right") {
@@ -239,7 +280,6 @@ struct HomeView: View {
                         }
                         .padding(10)
                     }
-                    .padding(.horizontal)
                 }
                 .padding(.bottom)
                 .sheet(item: $selectedRestaurant) { restaurant in
