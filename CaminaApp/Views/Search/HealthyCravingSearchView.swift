@@ -45,7 +45,13 @@ struct HealthyCravingSearchView: View {
     ]
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
+            // Carrusel con padding superior
+            if !searchResults.isEmpty {
+                FitnessFactsCarousel(facts: FitnessFactsCarousel.defaultFacts)
+                    .padding(.top, 10)
+            }
+
             SearchBar(text: $searchText, placeholder: "Busca tu antojito...", onCommit: performSearch)
                 .padding(.horizontal)
                 .padding(.top)
@@ -54,7 +60,7 @@ struct HealthyCravingSearchView: View {
                         searchResults = []
                     }
                 }
-            
+
             if isLoading {
                 ProgressView()
                     .padding()
@@ -71,7 +77,7 @@ struct HealthyCravingSearchView: View {
             } else {
                 resultsList
             }
-            
+
             Spacer()
         }
         .navigationTitle("Buscar antojitos")
@@ -82,7 +88,23 @@ struct HealthyCravingSearchView: View {
             }
         }
     }
-    
+
+    private var resultsList: some View {
+        List(searchResults) { restaurant in
+            HStack {
+                Spacer()  // Hace que la tarjeta sea más estrecha
+                RestaurantCardView(restaurant: restaurant)
+                    .frame(maxWidth: 350) // Ancho máximo para que no ocupe toda la pantalla
+                
+                Spacer()
+            }
+            .listRowSeparator(.hidden)
+            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+            .listRowBackground(Color.clear)
+        }
+        .listStyle(.plain)
+    }
+
     private var emptyStateView: some View {
         VStack {
             Image(systemName: "magnifyingglass")
@@ -98,16 +120,6 @@ struct HealthyCravingSearchView: View {
                 .padding()
         }
         .padding(.top, 50)
-    }
-    
-    private var resultsList: some View {
-        List(searchResults) { restaurant in
-            RestaurantCardView(restaurant: restaurant)
-                .listRowSeparator(.hidden)
-                .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
-                .listRowBackground(Color.clear)
-        }
-        .listStyle(.plain)
     }
     
     private func performSearch() {
