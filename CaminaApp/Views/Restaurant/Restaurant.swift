@@ -4,8 +4,8 @@ struct Restaurant: Identifiable {
     let id: UUID
     let name: String
     let foodType: String
-    let distance: Double // in km
-    let walkingTime: Int // in minutes
+    var distance: Double // in km
+    var walkingTime: Int // in minutes
     let caloriesInFood: Int
     let coordinate: CLLocationCoordinate2D
     
