@@ -1,5 +1,6 @@
 import SwiftUI
 import Charts
+import MapKit
 import Firebase
 import FirebaseAuth
 
@@ -9,6 +10,12 @@ struct ProfileView: View {
     @State private var userEmail: String = ""
     @State private var userAge: Int = 0
     @State private var isShowingVisitRest = false
+    
+    let visitedPlaces = [
+        Restaurants(name: "McDonald's", description: "Fast food chain with burgers and fries.", image: Image("restaurant1"), location: CLLocationCoordinate2D(latitude: 19.0610, longitude: -98.3062), menu: [], visitedBy: [], reviews: []),
+        Restaurants(name: "Little Caesars", description: "Pizza restaurant known for Hot-N-Ready.", image: Image("restaurant2"), location: CLLocationCoordinate2D(latitude: 19.0620, longitude: -98.3050), menu: [], visitedBy: [], reviews: []),
+        Restaurants(name: "KFC", description: "Famous for fried chicken and sides.", image: Image("restaurant3"), location: CLLocationCoordinate2D(latitude: 19.0630, longitude: -98.3040), menu: [], visitedBy: [], reviews: [])
+    ]
     
     var body: some View {
         NavigationView {
@@ -94,19 +101,43 @@ struct ProfileView: View {
                         SocialCardView(title: "Visited Restaurants", icon: "fork.knife") {
                             VStack(spacing: 12) {
                                 HStack {
-                                    ActivityCard(username: "\(userName)", action: "Visited", target: "McDonald's", icon: "m.circle.fill", color: .yellow)
+                                    ActivityCard(
+                                        username: "\(userName)",
+                                        action: "Visited",
+                                        target: "McDonald's",
+                                        icon: "m.circle.fill",
+                                        color: .yellow,
+                                        restaurant: visitedPlaces[0],
+                                        userLocation: visitedPlaces[0].location
+                                    )
                                     Spacer()
                                     Image(systemName: "chevron.right")
                                         .foregroundColor(.darkGreen)
                                 }
                                 HStack {
-                                    ActivityCard(username: "\(userName)", action: "Visited", target: "Little Caesars", icon: "flame.fill", color: .darkorange)
+                                    ActivityCard(
+                                        username: "\(userName)",
+                                        action: "Visited",
+                                        target: "Little Caesars",
+                                        icon: "flame.fill",
+                                        color: .darkorange,
+                                        restaurant: visitedPlaces[1],
+                                        userLocation: visitedPlaces[1].location
+                                    )
                                     Spacer()
                                     Image(systemName: "chevron.right")
                                         .foregroundColor(.darkGreen)
                                 }
                                 HStack {
-                                    ActivityCard(username: "\(userName)", action: "Visited", target: "KFC", icon: "leaf.fill", color: .red)
+                                    ActivityCard(
+                                        username: "\(userName)",
+                                        action: "Visited",
+                                        target: "KFC",
+                                        icon: "leaf.fill",
+                                        color: .red,
+                                        restaurant: visitedPlaces[2],
+                                        userLocation: visitedPlaces[2].location
+                                    )
                                     Spacer()
                                     Image(systemName: "chevron.right")
                                         .foregroundColor(.darkGreen)
