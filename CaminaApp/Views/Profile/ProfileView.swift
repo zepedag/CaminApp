@@ -141,6 +141,7 @@ struct ProfileView: View {
                 VisitedRestaurantsView()
             }
         }
+        .navigationBarBackButtonHidden(true)
         .accentColor(Color.primaryGreen)
         .onAppear {
             fetchUserDataFromDatabase()

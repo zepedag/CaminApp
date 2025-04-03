@@ -77,6 +77,7 @@ struct SocialGeneralView: View {
             }
             .navigationTitle("Social")
         }
+        .navigationBarBackButtonHidden(true)
         .accentColor(.primaryGreen)
     }
 }

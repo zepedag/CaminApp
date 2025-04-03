@@ -9,6 +9,7 @@ struct Restaurant: Identifiable {
     let caloriesInFood: Int
     let coordinate: CLLocationCoordinate2D
     
+    
     var caloriesBurned: Int {
         Int(Double(distance) * 60)
     }
