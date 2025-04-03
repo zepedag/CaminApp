@@ -44,6 +44,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }
     }
+    
 }
 
 // MARK: - Restaurant Detail Sheet
@@ -156,7 +157,10 @@ struct HomeView: View {
         NavigationView {
             ScrollView {
                 NavigationLink(destination: NotificationView(), isActive: $isShowingNotification) { EmptyView() }
-                NavigationLink(destination: HealthyCravingSearchView(initialSearchText: searchText),isActive: $isShowingSearchResults) { EmptyView() }
+                NavigationLink(
+                                   destination: HealthyCravingSearchView(initialSearchText: searchText),
+                                   isActive: $isShowingSearchResults
+                               ) { EmptyView() }
 
                 HStack {
                     VStack(alignment: .leading) {
@@ -171,7 +175,11 @@ struct HomeView: View {
                 .padding(.horizontal)
 
                 VStack(alignment: .leading, spacing: 10) {
-                    TextField("Let's eat...", text: $searchText)
+                    TextField("Let's eat...", text: $searchText, onCommit: {
+                        if !searchText.isEmpty {
+                            isShowingSearchResults = true
+                        }
+                    })
                         .padding()
                         .background(Color(.systemGray6))
                         .cornerRadius(12)
@@ -286,6 +294,7 @@ struct HomeView: View {
                     RestaurantDetailSheet(restaurant: restaurant)
                 }
                 .navigationTitle("Home")
+                .navigationBarBackButtonHidden(true)
                 .navigationBarItems(trailing: Button(action: {
                     isShowingNotification = true
                 }) {
@@ -293,6 +302,7 @@ struct HomeView: View {
                 })
             }
         }
+        .navigationBarBackButtonHidden(true)
         .accentColor(Color.primaryGreen)
         .onAppear {
             fetchUserNameFromDatabase()

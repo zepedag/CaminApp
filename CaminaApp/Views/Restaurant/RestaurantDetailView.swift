@@ -6,6 +6,7 @@ struct RestaurantDetailView: View {
     let restaurant: Restaurants
     let userLocation: CLLocationCoordinate2D
     let locations = ["Walk", "Bike"]
+
     var distanceInKm: Double {
         let userLoc = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
         let restLoc = CLLocation(latitude: restaurant.location.latitude, longitude: restaurant.location.longitude)
@@ -13,35 +14,32 @@ struct RestaurantDetailView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                // Imagen del restaurante
-                Image("restaurant1")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 250)
-                    .clipped()
-                    .cornerRadius(12)
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 16) {
+                    Image("restaurant1")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 250)
+                        .clipped()
+                        .cornerRadius(12)
 
-                // Nombre y descripción
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(restaurant.name)
-                        .font(.largeTitle.bold())
-                        .foregroundColor(.primaryGreen)
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(restaurant.name)
+                            .font(.largeTitle.bold())
+                            .foregroundColor(.primaryGreen)
 
-                    Text(restaurant.description)
-                        .font(.body)
-                        .foregroundColor(.secondary)
-                }
-                .padding(.horizontal)
+                        Text(restaurant.description)
+                            .font(.body)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.horizontal)
 
-                RestaurantMenuView(menu: restaurant.menu)
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("How to go?")
+                            .font(.title2.bold())
+                            .foregroundColor(.primaryGreen)
 
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("How to go?")
-                        .font(.title2.bold())
-                        .foregroundColor(.primaryGreen)
-                    
                         Picker("Choose a Spot", selection: $selectedLocation) {
                             Text("🚶‍♂️ Walk").tag("Walk")
                             Text("🚴‍♀️ Bike").tag("Bike")
@@ -53,12 +51,9 @@ struct RestaurantDetailView: View {
                         .background(Color.white)
                         .cornerRadius(10)
                         .shadow(color: .primaryGreen.opacity(0.1), radius: 4, x: 0, y: 2)
-                    
-                        
-                        // Botón centrado y con ancho controlado
-                        Button(action: {
-                            // Navegación a la pantalla de ruta
-                        }) {
+
+                        // ✅ Reemplazamos el estado con un NavigationLink directo
+                        NavigationLink(destination: TripInProgressView(menu: restaurant.menu, destinationName: restaurant.name)) {
                             HStack {
                                 Image(systemName: "location.circle.fill")
                                     .foregroundColor(.white)
@@ -72,88 +67,24 @@ struct RestaurantDetailView: View {
                             .cornerRadius(10)
                             .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
                         }
-                        .frame(maxWidth: .infinity)  // Centra el botón en su contenedor
-                }
-                .padding(.horizontal)
+                        .frame(maxWidth: .infinity)
+                    }
+                    .padding(.horizontal)
 
+                    VStack(alignment: .leading) {
+                        Text("Location")
+                            .font(.title2.bold())
+                            .foregroundColor(.primaryGreen)
+                            .padding(.leading, 18)
 
-                // Mapa
-                VStack(alignment: .leading) {
-                    Text("Location")
-                        .font(.title2.bold())
-                        .foregroundColor(.primaryGreen)
-                        .padding(.leading, 18)
-
-                    // Aquí usamos el nuevo componente MapMultiplePointsView
-                    MapMultiplePointsView(restaurants: [restaurant], userLocation: userLocation)
-
-                }
-                
-                // Información de distancia y calorías
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("Distance: \(String(format: "%.2f", distanceInKm)) km")
-                        .font(.subheadline)
-                    Text("Walking: \(String(format: "%.0f", distanceInKm * 50)) kcal")
-                    Text("Biking: \(String(format: "%.0f", distanceInKm * 30)) kcal")
-                }
-                .padding(.horizontal)
-                .foregroundColor(.gray)
-
-                // Amigos que lo visitaron
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("Friends who visited")
-                        .font(.title2.bold())
-                        .foregroundColor(.primaryGreen)
-
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12) {
-                            ForEach(restaurant.visitedBy, id: \ .id) { friend in
-                                VStack(spacing: 4) {
-                                    friend.profilePicture
-                                        .resizable()
-                                        .frame(width: 50, height: 50)
-                                        .clipShape(Circle())
-
-                                    Text(friend.name)
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
-                                }
-                            }
-                        }
+                        MapMultiplePointsView(restaurants: [restaurant], userLocation: userLocation)
                     }
                 }
-                .padding(.horizontal)
-
-                // Reviews
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Reviews")
-                        .font(.title2.bold())
-                        .foregroundColor(.primaryGreen)
-
-                    ForEach(restaurant.reviews) { review in
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack {
-                                Text(review.username)
-                                    .font(.subheadline.bold())
-                                Spacer()
-                                Text("⭐️ \(review.rating)/5")
-                            }
-                            Text(review.comment)
-                                .font(.body)
-                                .foregroundColor(.secondary)
-                        }
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(12)
-                        .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 1)
-                    }
-                }
-                .padding(.horizontal)
+                .padding(.vertical)
             }
-            .padding(.vertical)
+            .navigationTitle(restaurant.name)
+            .accentColor(.primaryGreen)
         }
-        .navigationTitle(restaurant.name)
-        .accentColor(.primaryGreen)
     }
 }
 

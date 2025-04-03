@@ -42,6 +42,7 @@ struct NavigationBar: View {
                 }
                 .tag(2)
         }
+        .navigationBarBackButtonHidden(true)
         .accentColor(Color.primaryGreen)
     }
 }
@@ -49,7 +50,7 @@ struct NavigationBar: View {
 struct NavigationBar_Previews: PreviewProvider {
     static var previews: some View {
         NavigationBar()
-            .navigationBarBackButtonHidden(false)
+            .navigationBarBackButtonHidden(true)
     }
 }
 
