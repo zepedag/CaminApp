@@ -1,4 +1,5 @@
 import SwiftUI
+import MapKit
 
 struct TripSummaryView: View {
     var restaurantName: String = "Santoua"
@@ -87,8 +88,20 @@ struct TripSummaryView: View {
                 .padding(.horizontal)
             }
             .navigationDestination(isPresented: $isShowingHome) {
-                HomeView()
+                let sampleRestaurants = [
+                    Restaurants(
+                        name: "Casa Cholula",
+                        description: "Traditional Mexican food with a modern twist.",
+                        image: Image(systemName: "photo"),
+                        location: CLLocationCoordinate2D(latitude: 19.0640, longitude: -98.3036),
+                        menu: [Dish(name: "Tacos al Pastor", calories: 450, price: 49.99)],
+                        visitedBy: [],
+                        reviews: []
+                    )
+                ]
+                let userLocation = CLLocationCoordinate2D(latitude: 19.0625, longitude: -98.3040)
                 
+                HomeView(restaurants: sampleRestaurants, userLocation: userLocation)
             }
         }
         

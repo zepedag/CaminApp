@@ -77,15 +77,83 @@ struct HomeView: View {
     @State private var showingDetailSheet = false
     @State private var isShowingSearchResults = false
     @State private var selectedRestaurantDetail: Restaurants? = nil
+    @State private var region: MKCoordinateRegion
+    @State private var isExpanded = false
+    
+    let restaurants: [Restaurants]
+    let userLocation: CLLocationCoordinate2D
     
     @State private var userName: String = "Hi"
 
     let nearbyRestaurants = [
-        RestaurantLocation(name: "Santoua", coordinate: CLLocationCoordinate2D(latitude: 19.0418, longitude: -98.2055), description: "Contemporary Japanese restaurant with sushi and ramen."),
-        RestaurantLocation(name: "Cus Cus Cus", coordinate: CLLocationCoordinate2D(latitude: 19.0420, longitude: -98.2070), description: "Comida árabe y mediterránea en un ambiente acogedor.")
+        RestaurantLocation(
+            name: "Santoua",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0418, longitude: -98.2055),
+            description: "Contemporary Japanese restaurant with sushi and ramen."
+        ),
+        RestaurantLocation(
+            name: "Cus Cus Cus",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0420, longitude: -98.2070),
+            description: "Comida árabe y mediterránea en un ambiente acogedor."
+        ),
+        RestaurantLocation(
+            name: "La Textilería",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0412, longitude: -98.2093),
+            description: "Espacio moderno con cocina de autor y brunch de fin de semana."
+        ),
+        RestaurantLocation(
+            name: "Central de Agaves",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0426, longitude: -98.2060),
+            description: "Restaurante mexicano con cocteles artesanales y platillos tradicionales."
+        ),
+        RestaurantLocation(
+            name: "Sushi Seven",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0431, longitude: -98.2048),
+            description: "Fusión japonesa con opciones de sushi, ramen y teppanyaki."
+        ),
+        RestaurantLocation(
+            name: "Café & Tocino",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0424, longitude: -98.2087),
+            description: "Desayunos todo el día, café artesanal y pan recién horneado."
+        ),
+        RestaurantLocation(
+            name: "La Casa del Chef",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0435, longitude: -98.2059),
+            description: "Cocina internacional con enfoque en ingredientes locales."
+        ),
+        RestaurantLocation(
+            name: "Tacos Don Pancho",
+            coordinate: CLLocationCoordinate2D(latitude: 19.0416, longitude: -98.2068),
+            description: "Tacos tradicionales al pastor y aguas frescas caseras."
+        )
     ]
 
+
+
+    
+    init(restaurants: [Restaurants], userLocation: CLLocationCoordinate2D) {
+        self.restaurants = restaurants
+        self.userLocation = userLocation
+
+        let coordinates = restaurants.map { $0.location }
+        let minLat = coordinates.min(by: { $0.latitude < $1.latitude })?.latitude ?? 19.0413
+        let maxLat = coordinates.max(by: { $0.latitude < $1.latitude })?.latitude ?? 19.0413
+        let minLon = coordinates.min(by: { $0.longitude < $1.longitude })?.longitude ?? -98.2070
+        let maxLon = coordinates.max(by: { $0.longitude < $1.longitude })?.longitude ?? -98.2055
+
+        let spanLatitudeDelta = maxLat - minLat + 0.005
+        let spanLongitudeDelta = maxLon - minLon + 0.005
+
+        _region = State(initialValue: MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2,
+                                           longitude: (minLon + maxLon) / 2),
+            span: MKCoordinateSpan(latitudeDelta: spanLatitudeDelta,
+                                   longitudeDelta: spanLongitudeDelta)
+        ))
+    }
+
     var body: some View {
+        
         NavigationView {
             ScrollView {
                 NavigationLink(destination: NotificationView(), isActive: $isShowingNotification) { EmptyView() }
@@ -173,12 +241,18 @@ struct HomeView: View {
                                     )
                                     showingDetailSheet = true
                                 }) {
-                                    VStack {
-                                        Image(systemName: "mappin.circle.fill")
-                                            .foregroundColor(.red)
-                                            .font(.title)
+                                    VStack(spacing: 0) {
+                                        ZStack {
+                                            Circle()
+                                                .frame(width: 20, height: 20)
+                                                .foregroundColor(.white)
+                                            Image(systemName: "mappin.circle.fill")
+                                                .foregroundColor(.red)
+                                                .font(.title)
+                                        }
                                         Text(restaurant.name)
                                             .font(.caption)
+                                            .fontWeight(.bold)
                                             .foregroundColor(.black)
                                     }
                                 }
@@ -193,48 +267,32 @@ struct HomeView: View {
                         .frame(height: 200)
                         .cornerRadius(12)
                     
-                        
-                        // Zoom buttons
-                        VStack {
-                            HStack {
-                                // Button to zoom out
-                                Button(action: {
-                                    let newSpan = MKCoordinateSpan(latitudeDelta: locationManager.region.span.latitudeDelta * 1.5, longitudeDelta: locationManager.region.span.longitudeDelta * 1.5)
-                                    locationManager.region.span = newSpan
-                                }) {
-                                    Image(systemName: "minus.circle.fill")
-                                        .font(.title)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .background(Circle().foregroundColor(.black).opacity(0.5))
-                                }
-                                
-                                Spacer()
-                                
-                                // Button to zoom in
-                                Button(action: {
-                                    let newSpan = MKCoordinateSpan(latitudeDelta: locationManager.region.span.latitudeDelta / 1.5, longitudeDelta: locationManager.region.span.longitudeDelta / 1.5)
-                                    locationManager.region.span = newSpan
-                                }) {
-                                    Image(systemName: "plus.circle.fill")
-                                        .font(.title)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .background(Circle().foregroundColor(.black).opacity(0.5))
-                                }
+                        VStack(spacing: 12) {
+                            MapControlButton2(icon: "plus") {
+                                locationManager.region.span.latitudeDelta /= 1.5
+                                locationManager.region.span.longitudeDelta /= 1.5
                             }
-                            .padding()
-                            Spacer()
+
+                            MapControlButton2(icon: "minus") {
+                                locationManager.region.span.latitudeDelta *= 1.5
+                                locationManager.region.span.longitudeDelta *= 1.5
+                            }
+
+                            MapControlButton2(icon: "arrow.up.left.and.arrow.down.right") {
+                                isExpanded.toggle()
+                            }
+
+                            MapControlButton2(icon: "map.fill") {
+                                openInMaps()
+                            }
                         }
+                        .padding(10)
                     }
-                    .padding(.horizontal)
                 }
                 .padding(.bottom)
-
                 .sheet(item: $selectedRestaurant) { restaurant in
                     RestaurantDetailSheet(restaurant: restaurant)
                 }
-
                 .navigationTitle("Home")
                 .navigationBarBackButtonHidden(true)
                 .navigationBarItems(trailing: Button(action: {
@@ -253,27 +311,53 @@ struct HomeView: View {
 
     private func fetchUserNameFromDatabase() {
         guard let userID = Auth.auth().currentUser?.uid else {
-            print("No hay usuario autenticado")
+            print("No identified user")
             userName = "there"
             return
         }
 
-        print("Buscando usuario con ID: \(userID)")
+        print("Searching user by ID: \(userID)")
 
         let dbRef = Database.database().reference()
         dbRef.child("users").child(userID).observeSingleEvent(of: .value) { snapshot in
-            print("Snapshot recibido: \(snapshot)")
+            print("Snapshot received: \(snapshot)")
 
             if let userData = snapshot.value as? [String: Any] {
-                print("Datos del usuario: \(userData)")
+                print("User data: \(userData)")
                 self.userName = userData["firstName"] as? String ?? "there"
             } else {
-                print("No se encontraron datos para el usuario")
+                print("User data not found")
                 self.userName = "there"
             }
         }
     }
+    
+    func openInMaps() {
+        guard let first = restaurants.first else { return }
+        let placemark = MKPlacemark(coordinate: first.location)
+        let item = MKMapItem(placemark: placemark)
+        item.name = first.name
+        item.openInMaps()
+    }
 }
+
+struct MapControlButton2: View {
+    let icon: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: icon)
+                .font(.system(size: 18, weight: .bold))
+                .foregroundColor(.white)
+                .frame(width: 36, height: 36)
+                .background(Color.black.opacity(0.7))
+                .clipShape(Circle())
+                .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
+        }
+    }
+}
+
 
 // MARK: - PopularNearbyView
 struct PopularNearbyView: View {
@@ -418,10 +502,24 @@ struct WeeklyActivityDetailView: View {
     }
 }
 
+
 // MARK: - Preview
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        let sampleRestaurants = [
+            Restaurants(
+                name: "Casa Cholula",
+                description: "Traditional Mexican food with a modern twist.",
+                image: Image(systemName: "photo"),
+                location: CLLocationCoordinate2D(latitude: 19.0640, longitude: -98.3036),
+                menu: [Dish(name: "Tacos al Pastor", calories: 450, price: 49.99)],
+                visitedBy: [],
+                reviews: []
+            )
+        ]
+        let userLocation = CLLocationCoordinate2D(latitude: 19.0625, longitude: -98.3040)
+
+        return HomeView(restaurants: sampleRestaurants, userLocation: userLocation)
             .navigationBarBackButtonHidden(true)
     }
 }

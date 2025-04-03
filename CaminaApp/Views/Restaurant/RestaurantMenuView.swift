@@ -32,26 +32,25 @@ struct RestaurantMenuView: View {
                                             .foregroundColor(.primaryGreen)
                                     }
                                     .buttonStyle(PlainButtonStyle())
+                                    .padding(.top, -15)
                                 }
 
                                 Text("\(dish.calories) kcal")
                                     .font(.caption)
                                     .foregroundColor(.gray)
-
-                                Text("$\(String(format: "%.2f", dish.price))")
-                                    .font(.caption2)
-                                    .foregroundColor(.primaryGreen)
-
-                                Spacer()
-
+                                
                                 HStack {
-                                    Spacer()
-                                    Image(systemName: "leaf")
+                                    Text("$\(String(format: "%.2f", dish.price))")
+                                        .font(.caption2)
                                         .foregroundColor(.primaryGreen)
+                                    Spacer()
+                                    Image(systemName: "plus.circle")
+                                            .foregroundColor(.primaryGreen)
                                 }
+                                
                             }
                             .padding()
-                            .frame(width: 140, height: 140)
+                            .frame(width: 140, height: 110)
                             .background(Color.white)
                             .cornerRadius(12)
                             .shadow(color: .black.opacity(0.15), radius: 6, x: 0, y: 3)
