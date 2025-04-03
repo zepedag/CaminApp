@@ -35,46 +35,7 @@ struct RestaurantDetailView: View {
                 }
                 .padding(.horizontal)
 
-                // Menú con calorías en scroll horizontal en tarjetas cuadradas
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Menu")
-                        .font(.title2.bold())
-                        .foregroundColor(.primaryGreen)
-
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12) {
-                            ForEach(restaurant.menu) { dish in
-                                VStack(alignment: .leading, spacing: 6) {
-                                    Text(dish.name)
-                                        .font(.headline)
-                                        .multilineTextAlignment(.leading)
-                                        .lineLimit(2)
-                                        .foregroundColor(.primary)
-
-                                    Text("\(dish.calories) kcal")
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
-                                    
-                                    Text("$\(String(format: "%.2f", dish.price)) MXN")
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
-                                    HStack {
-                                        Spacer()
-                                        Image(systemName: "leaf")
-                                            .foregroundColor(.primaryGreen)
-                                    }
-                                }
-                                .padding()
-                                .frame(width: 140, height: 140)
-                                .background(Color.white)
-                                .cornerRadius(12)
-                                .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 1)
-                            }
-                        }
-                        .padding(.vertical, 4)
-                    }
-                }
-                .padding(.horizontal)
+                RestaurantMenuView(menu: restaurant.menu)
 
                 VStack(alignment: .leading, spacing: 12) {
                     Text("How to go?")
