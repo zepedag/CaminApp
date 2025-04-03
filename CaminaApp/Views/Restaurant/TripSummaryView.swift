@@ -88,12 +88,14 @@ struct TripSummaryView: View {
             }
             .navigationDestination(isPresented: $isShowingHome) {
                 HomeView()
+                
             }
         }
         
         .padding()
         .background(Color.white.edgesIgnoringSafeArea(.all))
         .navigationTitle("Trip Stats")
+        .accentColor(Color.primaryGreen)
     }
     func shareTrip() {
         // Implementar funcionalidad de compartir
