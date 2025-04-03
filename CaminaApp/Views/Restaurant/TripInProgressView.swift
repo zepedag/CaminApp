@@ -2,7 +2,8 @@ import SwiftUI
 
 struct TripInProgressView: View {
     let menu: [Dish]
-    let destinationName: String // Nombre del restaurante de destino
+    let destinationName: String
+    @State private var isShowingTripSumm = false
     @State private var isShowingCamera = false
     @State private var dotCount = 0
 
@@ -40,17 +41,17 @@ struct TripInProgressView: View {
             .onAppear {
                 startAnimatingDots()
             }
-
+            
             // Menú del restaurante
             RestaurantMenuView(menu: menu)
                 .padding(.bottom, 10)
-
+            
             // Texto para indicar que puedes elegir
             Text("OR")
                 .font(.headline)
                 .foregroundColor(.gray)
                 .padding(.bottom, 10)
-
+            
             // Botón para abrir la cámara
             Button(action: {
                 isShowingCamera = true
@@ -69,6 +70,23 @@ struct TripInProgressView: View {
             .sheet(isPresented: $isShowingCamera) {
                 CameraView()
             }
+            Button(action: {
+                isShowingTripSumm = true
+            }) {
+                HStack {
+                    Image(systemName: "flag.checkered")
+                    Text("Finish Trip")
+                }
+                .foregroundColor(.white)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.brown)
+                .cornerRadius(10)
+                .padding(.horizontal)
+            }
+        }
+        .navigationDestination(isPresented: $isShowingTripSumm) {
+            TripSummaryView()
         }
         .navigationTitle("En camino...")
     }
